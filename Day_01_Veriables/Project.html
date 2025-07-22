@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 1 Project: Product Inventory Card</title>
+</head>
+
+<body>
+  <h1>Check Console (F12) for Product Details</h1>
+  <p>Open your browser's developer console (usually by pressing F12) to see the JavaScript output.</p>
+
+  <script>
+    // --- Day 1 Project: My Product Inventory Card Console App ---
+
+    // 1. Declare Initial Product Variables
+    const productName = "Wireless Bluetooth Speaker";
+    const modelNumber = "SPK-BT-3000";
+    let price = 49.99;
+    let stockQuantity = 120;
+    let isAvailable = true; // Initially, assume available if stock > 0
+    const manufacturer = "SoundTech Industries";
+
+    // Display Initial Product Details in Console
+    console.log("--- Initial Product Inventory ---");
+    console.log(`Product Name: ${productName}`);
+    console.log(`Model: ${modelNumber}`);
+    console.log(`Price: $${price.toFixed(2)}`); // .toFixed(2) ensures 2 decimal places for price
+    console.log(`Stock Quantity: ${stockQuantity} units`);
+    console.log(`Is Available: ${isAvailable}`);
+    console.log(`Manufacturer: ${manufacturer}`);
+
+    // Simulate Sales/Update Stock
+    console.log("\n--- Simulating Sales ---");
+    const unitsSold = 25;
+    stockQuantity = stockQuantity - unitsSold; // Subtract sold units from stock
+    // For simplicity today, we'll manually set isAvailable.
+    // In future days, we'll learn conditions to automate this.
+    if (stockQuantity <= 0) {
+      isAvailable = false;
+    } else {
+      isAvailable = true;
+    }
+
+
+    // Display Updated Product Details in Console
+    console.log("\n--- Updated Product Inventory (After Sales) ---");
+    console.log(`Product Name: ${productName}`);
+    console.log(`Model: ${modelNumber}`);
+    console.log(`Price: $${price.toFixed(2)}`);
+    console.log(`Stock Quantity: ${stockQuantity} units`);
+    console.log(`Is Available: ${isAvailable}`);
+    console.log(`Manufacturer: ${manufacturer}`);
+
+    // --- End of Day 1 Project ---
+  </script>
+</body>
+
+</html>

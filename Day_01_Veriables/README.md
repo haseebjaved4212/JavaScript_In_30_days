@@ -210,7 +210,7 @@ multi-line comment
 Goal: Create a simple HTML file with an embedded JavaScript block that simulates a product's inventory details. All information will be displayed in the browser's console using variables and console.log().
 
 **Project Logic/Steps:**
-
+```text
 - HTML Setup (day1_project.html):
 
 - Create a new folder named javascript-30-days.
@@ -219,12 +219,12 @@ Goal: Create a simple HTML file with an embedded JavaScript block that simulates
 
 - Add the basic HTML structure (<!DOCTYPE html>, <html>, <head>, <body>).
 
-- Include a simple heading in the <body>, e.g., <h1>Check Console (F12) for Product Details</h1>.
+- Include a simple heading in the body , e.g., <h1>Check Console (F12) for Product Details</h1>.
 
 - Place your JavaScript code inside a <script> tag. For best practice and to ensure the HTML content is ready, place this <script> tag just before the closing </body> tag.
 
 - Declare Initial Product Variables (JavaScript):
-
+```
 - Inside your <script> tags, declare the following variables:
 ```js
 const productName = "Wireless Bluetooth Speaker"; (String)
