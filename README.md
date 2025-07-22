@@ -3,7 +3,7 @@ My 30-day intensive JavaScript learning journey. Each day brings new challenges,
 
 
 
-## Your 30-Day JavaScript Journey: From Zero to Hero!
+##   30-Day JavaScript Journey: From Zero to Hero!
 
 "The only way to do great work is to love what you do. And if you haven't found it yet, keep looking. Don't settle. As with all matters of the heart, you'll know when you find it." – Steve Jobs
 
