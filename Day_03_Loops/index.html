@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 03: Loop Visualizer & Pattern Generator</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      /* Align to top for longer content */
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      margin: 20px auto;
+      padding: 25px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        grid-template-columns: 1fr 1fr;
+        /* Two columns on medium screens and up */
+      }
+    }
+
+    h1 {
+      color: #0056b3;
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: bold;
+      grid-column: 1 / -1;
+      /* Span across all columns */
+    }
+
+    .section-card {
+      background-color: #f8faff;
+      border: 1px solid #e0e7ff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-title {
+      color: #007bff;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      font-size: 1.75rem;
+      font-weight: 600;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .input-group input[type="number"],
+    .input-group input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .input-group input[type="number"]:focus,
+    .input-group input[type="text"]:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      /* Allow buttons to wrap on smaller screens */
+    }
+
+    .btn {
+      flex-grow: 1;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      text-align: center;
+      border: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-blue {
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    .btn-blue:hover {
+      background-color: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-green {
+      background-color: #22c55e;
+      color: white;
+    }
+
+    .btn-green:hover {
+      background-color: #16a34a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-purple {
+      background-color: #8b5cf6;
+      color: white;
+    }
+
+    .btn-purple:hover {
+      background-color: #7c3aed;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-orange {
+      background-color: #f97316;
+      color: white;
+    }
+
+    .btn-orange:hover {
+      background-color: #ea580c;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .output-area {
+      background-color: #eef2ff;
+      border: 1px solid #c7d2fe;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px;
+      min-height: 100px;
+      max-height: 300px;
+      /* Limit height for scroll */
+      overflow-y: auto;
+      /* Enable scrolling for long output */
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+      /* Preserve line breaks */
+      word-break: break-all;
+      /* Break long words */
+    }
+
+    .error-message {
+      color: #ef4444;
+      background-color: #fee2e2;
+      border: 1px solid #fca5a5;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .pattern-output {
+      text-align: center;
+      font-size: 1.5rem;
+      /* Larger font for patterns */
+      line-height: 1;
+      /* Tight line height for patterns */
+      color: #059669;
+      /* Green color for patterns */
+      min-height: 100px;
+      max-height: 300px;
+      overflow-y: auto;
+      white-space: pre;
+      /* Preserve spaces for pattern alignment */
+      font-family: monospace;
+      /* Monospace for consistent character width */
+      background-color: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Loop Visualizer & Pattern Generator</h1>
+
+    <!-- For Loop Section -->
+    <div class="section-card">
+      <h2 class="section-title">For Loop</h2>
+      <div class="input-group">
+        <label for="forStart">Start:</label>
+        <input type="number" id="forStart" value="1">
+      </div>
+      <div class="input-group">
+        <label for="forEnd">End:</label>
+        <input type="number" id="forEnd" value="5">
+      </div>
+      <div class="input-group">
+        <label for="forStep">Step:</label>
+        <input type="number" id="forStep" value="1">
+      </div>
+      <div class="btn-group">
+        <button id="runForLoopBtn" class="btn btn-blue">Run For Loop</button>
+        <button id="clearForLoopBtn" class="btn btn-orange">Clear</button>
+      </div>
+      <div id="forLoopOutput" class="output-area"></div>
+    </div>
+
+    <!-- While Loop Section -->
+    <div class="section-card">
+      <h2 class="section-title">While Loop</h2>
+      <div class="input-group">
+        <label for="whileStart">Start (initial 'i'):</label>
+        <input type="number" id="whileStart" value="0">
+      </div>
+      <div class="input-group">
+        <label for="whileCondition">Condition (e.g., `i < 5`):</label>
+            <input type="text" id="whileCondition" value="i < 5"
+              class="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg transition duration-200 ease-in-out">
+      </div>
+      <div class="input-group">
+        <label for="whileUpdate">Update (e.g., `i++` or `i += 2`):</label>
+        <input type="text" id="whileUpdate" value="i++"
+          class="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg transition duration-200 ease-in-out">
+      </div>
+      <div class="btn-group">
+        <button id="runWhileLoopBtn" class="btn btn-green">Run While Loop</button>
+        <button id="clearWhileLoopBtn" class="btn btn-orange">Clear</button>
+      </div>
+      <div id="whileLoopOutput" class="output-area"></div>
+      <p class="text-sm text-gray-500 mt-2">
+        *Note: Be careful with the condition and update to avoid infinite loops!
+      </p>
+    </div>
+
+    <!-- Pattern Generator Section -->
+    <div class="section-card">
+      <h2 class="section-title">Pattern Generator</h2>
+      <div class="input-group">
+        <label for="patternHeight">Height (rows):</label>
+        <input type="number" id="patternHeight" value="5">
+      </div>
+      <div class="btn-group">
+        <button id="generateSquareBtn" class="btn btn-purple">Square Pattern</button>
+        <button id="generateTriangleBtn" class="btn btn-purple">Right Triangle</button>
+        <button id="clearPatternBtn" class="btn btn-orange">Clear</button>
+      </div>
+      <div id="patternOutput" class="pattern-output"></div>
+    </div>
+
+    <!-- Global Message Area -->
+    <div id="globalMessage" class="error-message hidden"></div>
+  </div>
+
+  <!-- Link to your JavaScript file -->
+  <script src="index.js"></script>
+</body>
+
+</html>
