@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 04: Interactive Function Caller</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      margin: 20px auto;
+      padding: 25px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    h1 {
+      color: #0056b3;
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .section-card {
+      background-color: #f8faff;
+      border: 1px solid #e0e7ff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-title {
+      color: #007bff;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      font-size: 1.75rem;
+      font-weight: 600;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .input-group input[type="number"],
+    .input-group input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .input-group input[type="number"]:focus,
+    .input-group input[type="text"]:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      flex-grow: 1;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      text-align: center;
+      border: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-secondary {
+      background-color: #6b7280;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #4b5563;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .output-area {
+      background-color: #eef2ff;
+      border: 1px solid #c7d2fe;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px;
+      min-height: 60px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.1rem;
+      white-space: pre-wrap;
+      word-break: break-all;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #1e40af;
+    }
+
+    .error-message {
+      color: #ef4444;
+      background-color: #fee2e2;
+      border: 1px solid #fca5a5;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 10px;
+      text-align: center;
+      font-weight: 500;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Interactive Function Caller</h1>
+
+    <!-- Basic Math Functions -->
+    <div class="section-card">
+      <h2 class="section-title">Basic Math Operations</h2>
+      <div class="input-group">
+        <label for="mathNum1">Number 1:</label>
+        <input type="number" id="mathNum1" value="10">
+      </div>
+      <div class="input-group">
+        <label for="mathNum2">Number 2:</label>
+        <input type="number" id="mathNum2" value="5">
+      </div>
+      <div class="btn-group">
+        <button id="addBtn" class="btn btn-primary">+ Add</button>
+        <button id="subtractBtn" class="btn btn-primary">- Subtract</button>
+        <button id="multiplyBtn" class="btn btn-primary">* Multiply</button>
+        <button id="divideBtn" class="btn btn-primary">/ Divide</button>
+      </div>
+      <div id="mathResult" class="output-area">Result: 0</div>
+    </div>
+
+    <!-- Greeting Function -->
+    <div class="section-card">
+      <h2 class="section-title">Greeting Function</h2>
+      <div class="input-group">
+        <label for="greetName">Enter Name:</label>
+        <input type="text" id="greetName" value="Alice">
+      </div>
+      <div class="btn-group">
+        <button id="greetBtn" class="btn btn-primary">Get Greeting</button>
+      </div>
+      <div id="greetingResult" class="output-area">Result:</div>
+    </div>
+
+    <!-- Default and Rest Parameters Demo -->
+    <div class="section-card">
+      <h2 class="section-title">Advanced Parameters</h2>
+      <div class="input-group">
+        <label for="defaultParamName">Name (for Default Param):</label>
+        <input type="text" id="defaultParamName" placeholder="Leave empty for default" value="">
+      </div>
+      <div class="btn-group">
+        <button id="defaultParamBtn" class="btn btn-primary">Greet with Default</button>
+      </div>
+      <div id="defaultParamResult" class="output-area">Result:</div>
+
+      <div class="input-group mt-6">
+        <label for="restParamNumbers">Numbers (for Rest Param, comma-separated):</label>
+        <input type="text" id="restParamNumbers" value="10,20,30,40">
+      </div>
+      <div class="btn-group">
+        <button id="restParamBtn" class="btn btn-primary">Sum All Numbers</button>
+      </div>
+      <div id="restParamResult" class="output-area">Result:</div>
+    </div>
+
+    <!-- Global Message Area -->
+    <div id="globalMessage" class="error-message hidden"></div>
+  </div>
+
+  
+  <script src="index.js"></script>
+</body>
+
+</html>
