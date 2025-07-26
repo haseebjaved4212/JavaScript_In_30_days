@@ -317,18 +317,195 @@ const sum = numbers.reduce(function (accumulator, currentValue) {
 console.log(sum); // Output: 10
 ```
 
-## 🚀 Project for Day 05: Array Explorer & Manipulator
+## 🚀 Project for Day 05: ToDo List
 
-Today's project is an interactive web application that allows you to create an array, manipulate it using various common methods, and see the results directly on the page. This will provide hands-on experience with array operations.
-Features:
+The index.js file is the brain of our To-Do List application. It manages the data (your tasks) and dynamically updates the HTML to reflect changes.
 
-- Initialize an array from user input.
-- Perform push, pop, shift, unshift operations.
-- Demonstrate indexOf and includes.
-- Showcase map and filter for transformations.
-- Use join and split for string-array conversions.
-- Display the current state of the array after each operation.
-  (This project's code is located in index.html and index.js within this Day05 folder.)
+**1. Global State Management (tasks Array)**
+At the very top of index.js, you'll find:
+
+```JavaScript
+
+let tasks = [];
+This tasks array is the core data structure of our application. It holds all your to-do items.
+```
+
+Each item in this array is an object, not just a string. This is crucial because a task needs more than just its text; it also needs to know if it's completed or not.
+
+**Example of a task object:**
+
+{ text: "Learn JavaScript Arrays", completed: false }
+
+All operations (adding, deleting, marking complete, clearing) directly modify this tasks array, and then the UI is re-rendered based on its current state.
+
+**2. DOM Element References**
+
+Next, we grab references to the key HTML elements we'll be interacting with. This makes it easier to manipulate them in JavaScript without repeatedly searching the DOM.
+
+```JavaScript
+
+const taskInput = document.getElementById('taskInput');
+const addTaskBtn = document.getElementById('addTaskBtn');
+const taskList = document.getElementById('taskList');
+const clearCompletedBtn = document.getElementById('clearCompletedBtn');
+const errorMessageDiv = document.getElementById('errorMessage');
+
+```
+
+- taskInput: The text field where users type new tasks.
+
+- addTaskBtn: The "Add Task" button.
+
+- taskList: The <ul> element where the to-do items (<li>s) will be displayed.
+
+- clearCompletedBtn: The "Clear Completed Tasks" button.
+
+- errorMessageDiv: The div used to show temporary error messages.
+
+**3. Core Application Functions**
+
+These functions are the main logic units that perform specific actions in our To-Do List.
+
+- a. showErrorMessage(message)
+
+Purpose: Displays a temporary error or feedback message to the user.
+
+- How it works:
+
+* It takes a message string.
+
+* Sets the textContent of the errorMessageDiv.
+
+* Removes the hidden CSS class to make it visible.
+
+* Uses setTimeout() to re-add the hidden class after 3 seconds, making the message disappear automatically.
+
+- b. renderTasks()
+
+Purpose: This is the most critical function. It takes the current state of the tasks array and updates the HTML list (taskList) to reflect it.
+
+- How it works:
+
+* taskList.innerHTML = '';: It first clears all existing <li> elements from the <ul>. This is important to prevent duplicate entries when the list is re-rendered.
+
+* Empty List Check: If tasks.length is 0, it displays a friendly "No tasks yet!" message.
+
+* Iterating Tasks (tasks.forEach()):
+
+* It uses the forEach() array method to loop through each task object and its index in the tasks array.
+
+- For each task:
+
+```js
+- document.createElement('li'): A new <li>//  element is created.
+
+listItem.classList.add('todo-item'): //Adds base styling.
+
+if (task.completed) { listItem.classList.add('completed'); }: // Conditionally adds the completed class, which applies the strike-through and muted styles.
+```
+
+- Task Text: A <span> is created for the task's text and appended.
+
+- Delete Button: A "Delete" button is created and appended.
+
+- Event Listeners for Each Item:
+
+```js
+taskText.addEventListener('click', () => toggleTaskComplete(index)): //When the task text is clicked, it calls toggleTaskComplete() for that specific task's index.
+
+deleteBtn.addEventListener('click', (event) => { event.stopPropagation(); deleteTask(index); }): //When the delete button is clicked, it calls deleteTask() for that task's index. event.stopPropagation() is used to prevent the click on the delete button from also triggering the toggleTaskComplete on the parent <li>.
+
+taskList.appendChild(listItem): // The fully constructed <li> is added to the <ul>.
+```
+
+- c. addTask():
+
+* Purpose: Adds a new task to the list.
+
+- How it works:
+
+```js
+taskInput.value.trim():// Gets the text from the input field and removes any leading/trailing whitespace.
+
+// Validation: If the taskText is empty, it calls showErrorMessage() and stops.
+
+// Adding to Array
+(tasks.push()): tasks.push({ text: taskText, completed: false });
+//uses the push() array method to add a new task object (initially not completed) to the end of the tasks array.
+
+taskInput.value = '';: // Clears the input field.
+
+renderTasks();: Calls renderTasks() to redraw the UI, now including the newly added task.
+```
+
+- d. toggleTaskComplete(index)
+
+* Purpose: Changes a task's status between completed and incomplete.
+
+* How it works:
+```js
+tasks[index].completed = !tasks[index].completed;: //It directly accesses the task object at the given index in the tasks array and flips its completed boolean property (e.g., true becomes false, and false becomes true).
+
+renderTasks();: Calls renderTasks() //to update the UI, which will apply or remove the completed styling.
+`
+``` 
+
+
+* e. deleteTask(index):
+
+- Purpose: Removes a specific task from the list.
+
+* How it works:
+
+```js
+tasks.splice(index, 1);: // This is where the powerful splice() array method comes in. It removes 1 element starting from the given index. This directly modifies the tasks array.
+
+renderTasks();: Calls renderTasks() to update the UI, removing the deleted task.
+```
+* f. clearCompletedTasks()
+- Purpose: Removes all tasks that are currently marked as completed.
+
+* How it works:
+```js
+tasks = tasks.filter(task => !task.completed);: //This is a very efficient way to remove multiple items.
+```
+The filter() array method creates a new array containing only the elements for which the provided callback function returns true.
+
+The callback task => !task.completed means "keep this task if its completed property is false (i.e., it's not completed)."
+
+The tasks global array is then reassigned to this new, filtered array. The old array (with completed tasks) is discarded.
+
+renderTasks();: Calls renderTasks() to update the UI, showing only the remaining (incomplete) tasks.
+
+* 4. Event Listeners (Connecting UI to Logic)
+These lines connect user interactions (clicks, keypresses) to our JavaScript functions.
+
+```JavaScript
+
+addTaskBtn.addEventListener('click', addTask);
+
+taskInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        addTask();
+    }
+});
+
+clearCompletedBtn.addEventListener('click', clearCompletedTasks);
+//When the "Add Task" button is clicked, addTask() runs.
+
+//When you press Enter in the task input field, addTask() also runs.
+
+// When the "Clear Completed Tasks" button is clicked, clearCompletedTasks() runs.
+```
+* 5. Initial Render (DOMContentLoaded)
+```JavaScript
+
+document.addEventListener('DOMContentLoaded', renderTasks);
+//This ensures that the renderTasks() function is called as soon as the entire HTML document has been loaded and parsed by the browser. This is important so that when you first open the page, the taskList is correctly rendered (initially showing "No tasks yet!").
+
+```
+
+
 
 ### ✅ Practice Set:
 
@@ -400,3 +577,4 @@ console.log("Sum of values:", sumOfValues);
 - Many array methods (e.g., push, pop, shift, unshift, splice) mutate (change) the original array.
 - Other methods (e.g., indexOf, includes, slice, concat, map, filter, reduce) return a new array or value and do not modify the original array. This is often preferred for predictable code.
 - Higher-order array methods (forEach, map, filter, reduce) are powerful for iterating and transforming arrays efficiently using callback functions.
+````

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> To-Do List </title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom font for a clean look */
+    body {
+      font-family: "Inter", sans-serif;
+      /* Deep, subtle gradient background */
+      background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+      /* Dark Slate to Dark Gray */
+      color: #e2e8f0;
+      /* Light gray text for readability on dark background */
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      /* Align to top for longer content */
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .todo-container {
+      max-width: 600px;
+      width: 100%;
+      margin: 20px auto;
+      padding: 25px;
+      /* Darker background for the container with subtle transparency */
+      background-color: rgba(26, 32, 44, 0.9);
+      /* Dark slate with slight transparency */
+      border-radius: 16px;
+      /* More rounded corners */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      /* Stronger, darker shadow for depth */
+      border: 1px solid rgba(71, 85, 105, 0.5);
+      /* Subtle border */
+    }
+
+    h1 {
+      color: #63b3ed;
+      /* Light blue heading */
+      text-align: center;
+      font-size: 2.8rem;
+      /* Slightly larger heading */
+      margin-bottom: 25px;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      /* Text shadow for depth */
+    }
+
+    .input-section {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .input-section input[type="text"] {
+      flex-grow: 1;
+      padding: 12px;
+      background-color: #2d3748;
+      /* Darker input background */
+      color: #e2e8f0;
+      /* Light text color */
+      border: 2px solid #4a5568;
+      /* Darker border */
+      border-radius: 10px;
+      /* More rounded input corners */
+      font-size: 1.1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .input-section input[type="text"]::placeholder {
+      color: #a0aec0;
+      /* Lighter placeholder text */
+    }
+
+    .input-section input[type="text"]:focus {
+      outline: none;
+      border-color: #63b3ed;
+      /* Focus border color */
+      box-shadow: 0 0 0 4px rgba(99, 179, 237, 0.3);
+      /* Glow effect on focus */
+    }
+
+    .btn-add {
+      background: linear-gradient(45deg, #48bb78, #38a169);
+      /* Green gradient button */
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      /* More rounded button corners */
+      font-weight: bold;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      /* Stronger shadow */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-add:hover {
+      background: linear-gradient(45deg, #38a169, #2f855a);
+      /* Darker green on hover */
+      transform: translateY(-3px);
+      /* More pronounced lift effect */
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-add:active {
+      transform: translateY(0);
+      /* Press effect */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .todo-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .todo-item {
+      background-color: #2d3748;
+      /* Darker background for list items */
+      border: 1px solid #4a5568;
+      /* Subtle border */
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      /* More rounded corners */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1.1rem;
+      transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      /* Subtle shadow for items */
+    }
+
+    .todo-item:hover {
+      background-color: #4a5568;
+      /* Slightly lighter on hover */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .todo-item.completed {
+      background-color: #1a365d;
+      /* Muted blue for completed items */
+      text-decoration: line-through;
+      color: #a0aec0;
+      /* Lighter gray for completed text */
+      border-color: #2a4365;
+      opacity: 0.7;
+      /* Slightly fade completed tasks */
+    }
+
+    .todo-item-text {
+      flex-grow: 1;
+      cursor: pointer;
+      color: #e2e8f0;
+      /* Default text color */
+    }
+
+    .todo-item.completed .todo-item-text {
+      color: #a0aec0;
+      /* Completed text color */
+    }
+
+    .todo-actions {
+      display: flex;
+      gap: 8px;
+      margin-left: 15px;
+    }
+
+    .btn-action {
+      background-color: #e53e3e;
+      /* Red for delete */
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      /* More rounded */
+      font-weight: 500;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-action:hover {
+      background-color: #c53030;
+      /* Darker red on hover */
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-action:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-clear-completed {
+      background: linear-gradient(45deg, #4299e1, #3182ce);
+      /* Blue gradient button */
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .btn-clear-completed:hover {
+      background: linear-gradient(45deg, #3182ce, #2b6cb0);
+      /* Darker blue on hover */
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-clear-completed:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .empty-list-message {
+      text-align: center;
+      color: #a0aec0;
+      /* Lighter gray for empty message */
+      font-style: italic;
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #2d3748;
+      border-radius: 10px;
+      border: 1px dashed #4a5568;
+    }
+
+    .error-message {
+      color: #fed7d7;
+      /* Lighter red for text */
+      background-color: #c53030;
+      /* Darker red background */
+      border: 1px solid #9b2c2c;
+      /* Even darker red border */
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      text-align: center;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-gray-900 to-gray-700 text-gray-100">
+
+  <div class="todo-container">
+
+    <div id="errorMessage" class="error-message hidden"></div>
+
+    <div class="input-section">
+      <input type="text" id="taskInput" placeholder="Add a new task...">
+      <button id="addTaskBtn" class="btn-add">Add Task</button>
+    </div>
+
+    <ul id="taskList" class="todo-list">
+      <!-- To-Do items will be dynamically added here by JavaScript -->
+    </ul>
+
+    <button id="clearCompletedBtn" class="btn-clear-completed">Clear Completed Tasks</button>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
