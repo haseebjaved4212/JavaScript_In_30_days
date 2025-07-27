@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Product Catalog</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        /* Dark Slate to Dark Gray */
+        color: #e2e8f0;
+        /* Light gray text */
+        line-height: 1.6;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .catalog-container {
+        max-width: 1200px;
+        width: 100%;
+        margin: 20px auto;
+        padding: 25px;
+        background-color: rgba(26, 32, 44, 0.9);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(71, 85, 105, 0.5);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      @media (min-width: 768px) {
+        .catalog-container {
+          grid-template-columns: 1fr 2fr;
+          /* Sidebar for list, main for details */
+        }
+      }
+
+      h1 {
+        color: #63b3ed;
+        text-align: center;
+        font-size: 2.8rem;
+        margin-bottom: 25px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        grid-column: 1 / -1;
+        /* Span across all columns */
+      }
+
+      .sidebar {
+        background-color: #2d3748;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        height: fit-content;
+        /* Adjust height to content */
+      }
+
+      .main-content {
+        background-color: #2d3748;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .section-title {
+        color: #63b3ed;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+        border-bottom: 1px solid #4a5568;
+        padding-bottom: 8px;
+      }
+
+      .filter-group {
+        margin-bottom: 20px;
+      }
+
+      .filter-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #a0aec0;
+      }
+
+      .filter-group select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        background-color: #4a5568;
+        color: #e2e8f0;
+        border: 1px solid #6b7280;
+        font-size: 1rem;
+        appearance: none;
+        /* Remove default arrow */
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23e2e8f0%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.1L146.2%20200.5%2018.3%2074.5a17.6%2017.6%200%200%200-25.3%2023.3l130.8%20126.6a17.6%2017.6%200%200%200%2025.3%200L287%2092.7a17.6%2017.6%200%200%200%200-23.3z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.7em top 50%, 0 0;
+        background-size: 0.65em auto, 100%;
+      }
+
+      .filter-group select:focus {
+        outline: none;
+        border-color: #63b3ed;
+        box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.3);
+      }
+
+      .product-list {
+        display: grid;
+        gap: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      }
+
+      .product-card {
+        background-color: #4a5568;
+        /* Slightly lighter card background */
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      }
+
+      .product-card img {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        object-fit: cover;
+        margin-bottom: 10px;
+        border: 1px solid #a0aec0;
+      }
+
+      .product-card h3 {
+        font-weight: bold;
+        color: #e2e8f0;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+      }
+
+      .product-card p {
+        font-size: 0.9rem;
+        color: #cbd5e0;
+      }
+
+      .product-card .price {
+        font-weight: bold;
+        color: #48bb78;
+        /* Green for price */
+        margin-top: 8px;
+        font-size: 1.2rem;
+      }
+
+      .product-detail {
+        background-color: #4a5568;
+        /* Detail card background */
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      .product-detail.hidden {
+        display: none;
+      }
+
+      .product-detail img {
+        width: 200px;
+        height: 200px;
+        border-radius: 12px;
+        object-fit: cover;
+        margin-bottom: 20px;
+        border: 2px solid #63b3ed;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .product-detail h2 {
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: #63b3ed;
+        margin-bottom: 10px;
+      }
+
+      .product-detail .category {
+        font-size: 1rem;
+        color: #a0aec0;
+        margin-bottom: 5px;
+      }
+
+      .product-detail .price-detail {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #48bb78;
+        margin-bottom: 15px;
+      }
+
+      .product-detail .description {
+        font-size: 1rem;
+        color: #cbd5e0;
+        margin-bottom: 20px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .btn-clear-details {
+        background: linear-gradient(45deg, #e53e3e, #c53030);
+        /* Red gradient */
+        color: white;
+        padding: 12px 20px;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-clear-details:hover {
+        background: linear-gradient(45deg, #c53030, #9b2c2c);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .btn-clear-details:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .empty-list-message {
+        text-align: center;
+        color: #a0aec0;
+        font-style: italic;
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #2d3748;
+        border-radius: 10px;
+        border: 1px dashed #4a5568;
+        grid-column: 1 / -1;
+        /* Span across all columns */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="catalog-container">
+      <h1>Product Catalog</h1>
+
+      <div class="sidebar">
+        <h2 class="section-title">Filter Products</h2>
+        <div class="filter-group">
+          <label for="categoryFilter">Category:</label>
+          <select id="categoryFilter">
+            <option value="All">All Categories</option>
+            <!-- Categories will be populated by JS -->
+          </select>
+        </div>
+
+        <h2 class="section-title">Product List</h2>
+        <div id="productList" class="product-list">
+          <!-- Product cards will be loaded here by JS -->
+          <p class="empty-list-message">Loading products...</p>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <h2 class="section-title">Product Details</h2>
+        <div id="productDetail" class="product-detail hidden">
+          <!-- Detailed product info will be loaded here by JS -->
+          <p class="text-center text-gray-400">
+            Click on a product from the list to view its details.
+          </p>
+          <button id="clearDetailsBtn" class="btn-clear-details mt-6 hidden">
+            Clear Details
+          </button>
+        </div>
+        <p id="initialDetailMessage" class="text-center text-gray-400 mt-20">
+          Click on a product from the list to view its details.
+        </p>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
