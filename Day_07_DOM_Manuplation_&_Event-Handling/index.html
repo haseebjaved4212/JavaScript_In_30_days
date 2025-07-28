@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 07: Image Carousel</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+      /* Dark Slate to Dark Gray */
+      color: #e2e8f0;
+      /* Light gray text */
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* Center vertically */
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .carousel-container {
+      max-width: 700px;
+      width: 100%;
+      background-color: rgba(26, 32, 44, 0.9);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(71, 85, 105, 0.5);
+      padding: 25px;
+      text-align: center;
+      position: relative;
+      /* For absolute positioning of buttons */
+    }
+
+    h1 {
+      color: #63b3ed;
+      font-size: 2.8rem;
+      margin-bottom: 25px;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .carousel-image-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 66.66%;
+      /* 3:2 Aspect Ratio (400/600) */
+      background-color: #4a5568;
+      /* Placeholder background */
+      border-radius: 12px;
+      overflow: hidden;
+      /* Hide overflow for rounded corners */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .carousel-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Cover the area without distortion */
+      border-radius: 12px;
+      transition: opacity 0.5s ease-in-out;
+      /* Smooth fade transition */
+    }
+
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(71, 85, 105, 0.7);
+      /* Semi-transparent dark gray */
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50%;
+      /* Circular buttons */
+      font-size: 1.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      transition: background-color 0.3s, transform 0.2s;
+      z-index: 10;
+      /* Ensure buttons are above image */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      /* Fixed width for circular shape */
+      height: 50px;
+      /* Fixed height for circular shape */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-button:hover {
+      background-color: rgba(11, 11, 11, 0.8);
+      /* Light blue on hover */
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .nav-button:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    #prevBtn {
+      left: 10px;
+    }
+
+    #nextBtn {
+      right: 10px;
+    }
+
+    .dots-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background-color: rgba(160, 174, 192, 0.5);
+      /* Light gray transparent */
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      border: 1px solid rgba(160, 174, 192, 0.3);
+    }
+
+    .dot.active {
+      background-color: #63b3ed;
+      /* Active dot color */
+      transform: scale(1.2);
+      border-color: #63b3ed;
+      box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.3);
+    }
+
+    .dot:hover:not(.active) {
+      background-color: rgba(160, 174, 192, 0.8);
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="carousel-container">
+    <h1>Image Carousel</h1>
+
+    <div class="carousel-image-wrapper">
+      <img id="carouselImage" class="carousel-image" src="" alt="Carousel Image">
+      <button id="prevBtn" class="nav-button">&lt;</button>
+      <button id="nextBtn" class="nav-button">&gt;</button>
+    </div>
+
+    <div id="dotsContainer" class="dots-container">
+      <!-- Dots will be dynamically added here by JavaScript -->
+    </div>
+
+    <!-- Optional: Auto-play controls -->
+    <!--
+        <div class="mt-6 flex justify-center gap-4">
+            <button id="playBtn" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">Play</button>
+            <button id="pauseBtn" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">Pause</button>
+        </div>
+        -->
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
