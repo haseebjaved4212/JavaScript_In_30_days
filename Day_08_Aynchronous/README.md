@@ -213,7 +213,7 @@ The index.js file handles the asynchronous fetching of quotes and updating the U
 
 **1. API Endpoint and DOM References**
 ```js
-const quoteApiUrl = 'https://api.quotable.io/random'; // Public API for random quotes
+const quoteApiUrl = 'https://dummyjson.com/quotes?limit=30'; //  API for random quotes
 const quoteText = document.getElementById('quoteText');
 const quoteAuthor = document.getElementById('quoteAuthor');
 const newQuoteBtn = document.getElementById('newQuoteBtn');
