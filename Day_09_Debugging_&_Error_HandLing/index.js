@@ -1,6 +1,6 @@
 // Day 09 Project: Simple Error-Resilient Calculator
 // This file contains the interactive project logic, focusing on error handling.
-// All detailed explanations and practice set solutions are in README.md.
+
 
 // --- DOM Element References ---
 const num1Input = document.getElementById("num1");
