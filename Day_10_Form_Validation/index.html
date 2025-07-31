@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 10: Registration Form (Dark Theme)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+
+      color: #e2e8f0;
+
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .form-container {
+      max-width: 500px;
+      width: 100%;
+      background-color: rgba(26, 32, 44, 0.9);
+
+      border-radius: 16px;
+
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+      border: 1px solid rgba(71, 85, 105, 0.5);
+
+      padding: 30px;
+    }
+
+    h1 {
+      color: #63b3ed;
+
+      text-align: center;
+      font-size: 2.8rem;
+
+      margin-bottom: 25px;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+    }
+
+    .form-control {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-control label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #a0aec0;
+
+    }
+
+    .form-control input {
+      width: 100%;
+      padding: 12px;
+      background-color: #2d3748;
+      /* Darker input background */
+      color: #e2e8f0;
+      /* Light text color */
+      border: 2px solid #4a5568;
+      /* Darker border */
+      border-radius: 10px;
+      /* More rounded input corners */
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control input::placeholder {
+      color: #a0aec0;
+      /* Lighter placeholder text */
+    }
+
+    .form-control input:focus {
+      outline: none;
+      border-color: #63b3ed;
+      /* Focus border color */
+      box-shadow: 0 0 0 4px rgba(99, 179, 237, 0.3);
+      /* Glow effect on focus */
+    }
+
+    .form-control.success input {
+      border-color: #48bb78;
+      /* Green border for success on dark theme */
+    }
+
+    .form-control.error input {
+      border-color: #e53e3e;
+      /* Red border for error on dark theme */
+    }
+
+    .form-control small {
+      color: #e53e3e;
+      /* Red text for error message on dark theme */
+      position: absolute;
+      bottom: -18px;
+      left: 0;
+      font-size: 0.85rem;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .form-control.error small {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(45deg, #4299e1, #3182ce);
+
+      color: white;
+      border: none;
+      border-radius: 10px;
+
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(45deg, #3182ce, #2b6cb0);
+
+      transform: translateY(-3px);
+
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+      /* Press effect */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .success-message {
+      background-color: #1a365d;
+
+      color: #a7f3d0;
+
+      border: 1px solid #2a4365;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: opacity 0.5s ease-in-out;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <h1>Register Account</h1>
+    <form id="registrationForm">
+      <div class="form-control">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter username">
+        <small>Error message</small>
+      </div>
+      <div class="form-control">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter email">
+        <small>Error message</small>
+      </div>
+      <div class="form-control">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password">
+        <small>Error message</small>
+      </div>
+      <div class="form-control">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm password">
+        <small>Error message</small>
+      </div>
+      <button type="submit" class="btn-submit">Register</button>
+    </form>
+    <div id="successMessage" class="success-message hidden">
+      Registration successful! Welcome aboard.
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
