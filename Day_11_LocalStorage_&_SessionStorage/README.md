@@ -480,3 +480,16 @@ console.log("Item 1 after clear:", localStorage.getItem('item1'));   // Expected
 ```
 
 </details>
+
+---
+
+## 💡 Key Takeaways for Day 11:
+- Web Storage (Local & Session) provides a powerful way to store key-value string pairs directly in the browser.
+
+- `g` persists data indefinitely (until manually cleared).
+
+- `sessionStorage` persists data only for the current browser tab/window session.
+
+- Always use `JSON.stringify() `to store JavaScript objects/arrays and JSON.parse() to retrieve them from Web Storage.
+
+- Consider `try...catch` blocks for setItem and getItem to handle potential storage errors.
