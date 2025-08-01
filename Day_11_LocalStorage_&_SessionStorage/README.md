@@ -383,3 +383,100 @@ document.addEventListener('DOMContentLoaded', () => {
 - Event listeners connect buttons to their respective functions.
 
 - ` DOMContentLoaded` ensures that `loadNotes()` and `renderNotes()` are called when the page loads, so any previously saved notes are displayed immediately.
+
+## ✅ Practice Set :
+
+<details><summary>
+1. Store and Retrieve a Simple String:
+</summary>
+
+```js
+// Store
+localStorage.setItem('username', 'dev_user_123');
+console.log("Username stored.");
+
+// Retrieve
+const storedUsername = localStorage.getItem('username');
+console.log("Retrieved Username:", storedUsername); // Expected: dev_user_123
+
+// To test persistence: Close and reopen browser/tab, then run:
+// console.log("Retrieved Username after reopen:", localStorage.getItem('username'));
+```
+</details>
+
+<details><summary>
+2. Store and Retrieve an Object:
+</summary>
+
+```js
+const settings = {
+    theme: 'dark',
+    notifications: true,
+    volume: 75,
+    lastLogin: new Date().toISOString() // Store date as ISO string
+};
+
+// Store (stringify first)
+localStorage.setItem('appSettings', JSON.stringify(settings));
+console.log("Settings object stored as JSON.");
+
+// Retrieve (parse back)
+const storedSettingsJson = localStorage.getItem('appSettings');
+if (storedSettingsJson) {
+    const retrievedSettings = JSON.parse(storedSettingsJson);
+    console.log("Retrieved Settings Object:", retrievedSettings);
+    console.log("Theme:", retrievedSettings.theme);
+} else {
+    console.log("No settings found in local storage.");
+}
+```
+  </details>
+
+<details><summary>
+3. Use sessionStorage:
+</summary>
+
+```js
+
+const currentSessionId = Math.random().toString(36).substring(2, 9);
+sessionStorage.setItem('sessionId', currentSessionId);
+console.log("Session ID stored:", currentSessionId);
+
+// Retrieve
+const retrievedSessionId = sessionStorage.getItem('sessionId');
+console.log("Retrieved Session ID:", retrievedSessionId); // Should be the same as stored
+
+// To test session scope:
+// 1. Open a NEW tab to the same page: sessionStorage.getItem('sessionId') will be NULL.
+// 2. Close the current tab and reopen it: sessionStorage.getItem('sessionId') will be NULL.
+```
+</details>
+
+<details><summary>
+4. Remove Item:
+</summary>
+
+```js
+
+localStorage.setItem('tempData', 'This is temporary data.');
+console.log("tempData before removal:", localStorage.getItem('tempData'));
+
+localStorage.removeItem('tempData');
+console.log("tempData after removal:", localStorage.getItem('tempData')); // Expected: null
+```
+</details>
+<details><summary>
+5. Clear All Storage:
+</summary>
+
+```js
+localStorage.setItem('item1', 'Value 1');
+localStorage.setItem('item2', 'Value 2');
+console.log("Local Storage Length before clear:", localStorage.length); // Expected: 2 (or more if other items exist)
+
+localStorage.clear();
+console.log("Local Storage Length after clear:", localStorage.length); // Expected: 0
+console.log("Item 1 after clear:", localStorage.getItem('item1'));   // Expected: null
+```
+
+</details>
