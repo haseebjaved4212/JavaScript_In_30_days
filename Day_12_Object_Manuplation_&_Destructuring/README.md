@@ -112,6 +112,49 @@ This is a clean and modern way to process the data. It uses the map method to it
 
 The `renderOriginalBooks()` and `renderExtractedInfo()` functions handle displaying the data on the webpage, making it easy to compare the original data with the processed results.
 
+
+## ✅ Practice Set :
+
+<details><summary>
+1. Iterate over keys:
+</summary >
+
+```js
+const car = { make: 'Toyota', model: 'Camry', year: 2021 };
+Object.keys(car).forEach(key => {
+    console.log(key);
+});
+// Output:
+// make
+// model
+// year
+```
+</details>
+<details><summary>
+2. Calculate total value:
+</summary >
+
+```js
+const prices = { apple: 1.5, banana: 0.75, orange: 1.25 };
+const total = Object.values(prices).reduce((sum, currentPrice) => sum + currentPrice, 0);
+console.log(`Total price: $${total}`); // Output: Total price: $3.5
+```
+</details>
+<details><summary>
+3. Find a specific property:
+</summary>
+
+```js
+const car = { make: 'Toyota', model: 'Camry', year: 2021 };
+for (const [key, value] of Object.entries(car)) {
+    if (key === 'model') {
+        console.log(`The model is: ${value}`); // Output: The model is: Camry
+    }
+}
+```
+</details>
+
+---
 ##  Key Takeaways for Day 12:
 
 - `Object.keys()`, `Object.values(),` and `Object.entries()` are excellent for iterating over object properties.
