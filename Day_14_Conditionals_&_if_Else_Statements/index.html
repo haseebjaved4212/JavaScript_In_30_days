@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 3: Age Eligibility Checker</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #4b5563 0%, #1f2937 100%);
+      color: #e5e7eb;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      width: 100%;
+      background-color: #374151;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid #4b5563;
+      text-align: center;
+    }
+
+    h1 {
+      color: #60a5fa;
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    label {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #d1d5db;
+    }
+
+    #ageInput {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #4b5563;
+      background-color: #1f2937;
+      color: #f3f4f6;
+      font-size: 1rem;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #ageInput:focus {
+      outline: none;
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5);
+    }
+
+    .action-btn {
+      background: linear-gradient(45deg, #34d399, #10b981);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      width: 100%;
+    }
+
+    .action-btn:hover {
+      background: linear-gradient(45deg, #10b981, #059669);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .action-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    #resultsDiv {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #1f2937;
+      border-radius: 8px;
+      border: 1px solid #4b5563;
+      min-height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #a7f3d0;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Age Eligibility Checker</h1>
+
+    <label for="ageInput">Enter your age:</label>
+    <input type="number" id="ageInput" placeholder="e.g., 25" min="0">
+
+    <button id="checkBtn" class="action-btn">Check Eligibility</button>
+
+    <div id="resultsDiv">
+      Your eligibility will be displayed here.
+    </div>
+  </div>
+
+</body>
+
+</html>
