@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 6: Variable Scope Explorer</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #1f2937 0%, #0c1524 100%);
+      color: #e5e7eb;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      
+            width: 100%;
+            background-color: #111827;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #374151;
+            text-align: center;
+        }
+        h1 {
+            color: #a7f3d0;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .action-btn {
+            background: linear-gradient(45deg, #34d399, #10b981);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            flex-grow: 1;
+        }
+        .action-btn:hover {
+            background: linear-gradient(45deg, #10b981, #059669);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        .action-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .results-panel {
+            background-color: #1f2937;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #374151;
+            min-height: 200px;
+            text-align: left;
+        }
+        .results-panel h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #a7f3d0;
+            border-bottom: 2px solid #34d399;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .results-panel pre {
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.9rem;
+            color: #e5e7eb;
+        }
+    </style>
+    </head>
+    
+    <body>
+      <div class="container">
+        <h1>Variable Scope Explorer</h1>
+        <p class="text-gray-400 mb-6">Click the buttons to see how variable accessibility changes with each scope.</p>
+    
+        <div class="controls">
+          <button id="globalScopeBtn" class="action-btn">Demonstrate Global Scope</button>
+          <button id="functionScopeBtn" class="action-btn">Demonstrate Function Scope</button>
+          <button id="blockScopeBtn" class="action-btn">Demonstrate Block Scope</button>
+        </div>
+    
+        <div class="results-panel">
+          <h2>Results</h2>
+          <pre id="output"></pre>
+        </div>
+      </div>
+    </body>
+    
+    </html>
