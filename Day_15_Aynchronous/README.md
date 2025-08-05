@@ -1,7 +1,7 @@
-# Day 08: JavaScript Asynchronous Programming (Project: Random Quote Generator)
+# Day 15: JavaScript Asynchronous Programming (Project: Random Quote Generator)
 
 
-Welcome to Day 08 of my 30 Days of JavaScript Challenge! Today, we're tackling one of the most crucial and often challenging topics in modern web development: Asynchronous JavaScript. In a world where web applications constantly interact with external resources (like APIs, databases, or files), understanding how to handle operations that don't complete instantly is vital. We'll explore Callbacks, Promises, and the modern async/await syntax.
+Welcome to Day 15 of my 30 Days of JavaScript Challenge! Today, we're tackling one of the most crucial and often challenging topics in modern web development: Asynchronous JavaScript. In a world where web applications constantly interact with external resources (like APIs, databases, or files), understanding how to handle operations that don't complete instantly is vital. We'll explore Callbacks, Promises, and the modern async/await syntax.
 
 For our project today, we'll build a Simple Random Quote Generator, which will effectively demonstrate fetching data asynchronously from an external API.
 
@@ -402,7 +402,8 @@ simulateErrorFetch();
 ```
 </details>
 
-### 💡 Key Takeaways for Day 08:
+### 💡 Key Takeaways for Day 15
+:
 - `Asynchronous` JavaScript is crucial for non-blocking operations, keeping your UI responsive.
 
 - `Callbacks` are the oldest method but can lead to "callback hell" for complex sequences.
