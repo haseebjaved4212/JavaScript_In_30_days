@@ -402,8 +402,8 @@ simulateErrorFetch();
 ```
 </details>
 
-### 💡 Key Takeaways for Day 15
-:
+### 💡 Key Takeaways for Day 15:
+
 - `Asynchronous` JavaScript is crucial for non-blocking operations, keeping your UI responsive.
 
 - `Callbacks` are the oldest method but can lead to "callback hell" for complex sequences.
