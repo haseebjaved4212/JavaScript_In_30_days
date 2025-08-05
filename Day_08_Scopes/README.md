@@ -1,6 +1,6 @@
-# Day 15: Scopes - Global, Function & Block
+# Day 08: Scopes - Global, Function & Block
 
-Welcome to Day 15 of our 30 Days of JavaScript Challenge! Today, we're focusing on scope, a fundamental concept that governs the accessibility of variables, functions, and objects in your code. Mastering scope is key to avoiding bugs and writing clean, maintainable JavaScript.
+Welcome to Day 08 of our 30 Days of JavaScript Challenge! Today, we're focusing on scope, a fundamental concept that governs the accessibility of variables, functions, and objects in your code. Mastering scope is key to avoiding bugs and writing clean, maintainable JavaScript.
 
 Our project, the "Variable Scope Explorer," will give you a hands-on way to see how different types of scope behave in practice.
 
@@ -172,7 +172,7 @@ console.log(`Outside function: ${name}`); // Output: Outside function: Global Na
 
 --- 
 
-## 💡 Key Takeaways for Day 15:
+## 💡 Key Takeaways for Day 08:
 
 - Scope defines accessibility. It's the set of rules that determines where a variable can be used.
 
