@@ -1,4 +1,4 @@
-// Day 10 Project: Simple Registration Form with Validation
+// Day 16 Project: Simple Registration Form with Validation
 
 // --- DOM Element References ---
 const registrationForm = document.getElementById("registrationForm");
