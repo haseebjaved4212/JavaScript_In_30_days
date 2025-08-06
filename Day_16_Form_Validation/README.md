@@ -1,6 +1,6 @@
-# Day 10: JavaScript Forms & Input Validation (Project: Registration Form)
+# Day 16 : JavaScript Forms & Input Validation (Project: Registration Form)
 
-Welcome to Day 10 of my 30 Days of JavaScript Challenge! Today, we're diving into how JavaScript interacts with HTML Forms and, more importantly, how to perform Input Validation. Forms are the primary way users provide data to web applications, and ensuring that this data is correct, complete, and secure is a critical skill for any web developer.
+Welcome to Day 16 of my 30 Days of JavaScript Challenge! Today, we're diving into how JavaScript interacts with HTML Forms and, more importantly, how to perform Input Validation. Forms are the primary way users provide data to web applications, and ensuring that this data is correct, complete, and secure is a critical skill for any web developer.
 
 For our project, we'll build a Simple Registration Form with Validation. This will demonstrate how to capture form data, apply various validation rules, and provide clear feedback to the user.
 
@@ -345,7 +345,7 @@ confirmPasswordInput.addEventListener("input", () =>
 
 ## ✅ Practice Set :
 
-Here are the solutions to the practice problems.
+
 
 <details><summary>1. Basic Form Data Retrieval</summary>
 
@@ -537,7 +537,7 @@ Here are the solutions to the practice problems.
 
 ---
 
-### 💡 Key Takeaways for Day 10:
+### 💡 Key Takeaways for Day 16:
 
 - HTML Forms are essential for user input; JavaScript allows dynamic control and validation.
 
