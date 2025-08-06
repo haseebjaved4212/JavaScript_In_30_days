@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 10: Student Grade Analyzer</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+      /* Dark Slate to Dark Gray */
+      color: #e2e8f0;
+      /* Light gray text */
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1024px;
+      margin: 0 auto;
+      background-color: rgba(26, 32, 44, 0.9);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(71, 85, 105, 0.5);
+    }
+
+    h1 {
+      color: #63b3ed;
+      text-align: center;
+      font-size: 2.8rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      background: linear-gradient(45deg, #4299e1, #3182ce);
+      /* Blue gradient */
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .action-btn:hover {
+      background: linear-gradient(45deg, #3182ce, #2b6cb0);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .action-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .data-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .data-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .panel {
+      background-color: #2d3748;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      border: 1px solid #4a5568;
+    }
+
+    .panel h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #63b3ed;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #63b3ed;
+      padding-bottom: 0.5rem;
+    }
+
+    pre {
+      background-color: #1a202c;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px dashed #4a5568;
+    }
+
+    .average-score-display {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #48bb78;
+      /* Green for average score */
+      text-align: center;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Student Grade Analyzer</h1>
+    <div class="controls">
+      <button id="calculateGradesBtn" class="action-btn">Calculate Letter Grades (map)</button>
+      <button id="filterPassingBtn" class="action-btn">Filter Passing Students (filter)</button>
+      <button id="calculateAverageBtn" class="action-btn">Calculate Average Score (reduce)</button>
+    </div>
+
+    <div class="data-container">
+      <!-- Original Data Panel -->
+      <div class="panel">
+        <h2>Original Student Data</h2>
+        <pre id="originalData"></pre>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="panel">
+        <h2>Results</h2>
+        <div id="resultsPanel">
+          <p class="text-center text-gray-400 mt-4">Click a button to see analysis results here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
