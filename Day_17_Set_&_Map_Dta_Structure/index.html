@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 14: Unique Item Tracker</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+      color: #e2e8f0;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      /* Align to top for longer content */
+      padding: 20px;
+    }
+
+    .app-container {
+      max-width: 900px;
+      width: 100%;
+      background-color: rgba(26, 32, 44, 0.9);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(71, 85, 105, 0.5);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    h1 {
+      color: #63b3ed;
+      text-align: center;
+      font-size: 2.8rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .section-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .section-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .data-section {
+      background-color: #2d3748;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      border: 1px solid #4a5568;
+    }
+
+    .data-section h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #48bb78;
+      /* Green for section titles */
+      margin-bottom: 15px;
+      border-bottom: 1px solid #4a5568;
+      padding-bottom: 8px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .input-group input[type="text"] {
+      flex-grow: 1;
+      padding: 10px;
+      background-color: #4a5568;
+      color: #e2e8f0;
+      border: 1px solid #6b7280;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    .input-group input[type="text"]:focus {
+      outline: none;
+      border-color: #63b3ed;
+      box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.3);
+    }
+
+    .action-btn {
+      background: linear-gradient(45deg, #4299e1, #3182ce);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .action-btn:hover {
+      background: linear-gradient(45deg, #3182ce, #2b6cb0);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .action-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .display-list {
+      background-color: #1a202c;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px dashed #4a5568;
+      min-height: 150px;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 15px;
+    }
+
+    .display-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #2d3748;
+      color: #cbd5e0;
+    }
+
+    .display-list li:last-child {
+      border-bottom: none;
+    }
+
+    .size-display {
+      text-align: right;
+      font-size: 0.9rem;
+      color: #a0aec0;
+      margin-top: 10px;
+    }
+
+    .message-display {
+      background-color: #4a5568;
+      color: #a7f3d0;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-container">
+    <h1>Unique Item Tracker</h1>
+
+    <div class="section-container">
+      <!-- Set Section -->
+      <div class="data-section">
+        <h2>Set (Unique Items)</h2>
+        <div class="input-group">
+          <input type="text" id="setItemInput" placeholder="Add unique item...">
+          <button id="addSetBtn" class="action-btn">Add</button>
+          <button id="checkSetBtn" class="action-btn">Check</button>
+          <button id="removeSetBtn" class="action-btn">Remove</button>
+        </div>
+        <div id="setResultMsg" class="message-display hidden"></div>
+        <ul id="setListDisplay" class="display-list"></ul>
+        <div id="setSizeDisplay" class="size-display">Size: 0</div>
+      </div>
+
+      <!-- Map Section -->
+      <div class="data-section">
+        <h2>Map (Product Codes)</h2>
+        <div class="input-group">
+          <input type="text" id="mapKeyCodeInput" placeholder="Product Code (Key)">
+          <input type="text" id="mapValueInput" placeholder="Product Name (Value)">
+          <button id="addMapBtn" class="action-btn">Add/Update</button>
+        </div>
+        <div class="input-group">
+          <input type="text" id="mapGetCodeInput" placeholder="Get by Code">
+          <button id="getMapBtn" class="action-btn">Get</button>
+          <button id="removeMapBtn" class="action-btn">Remove</button>
+        </div>
+        <div id="mapResultMsg" class="message-display hidden"></div>
+        <ul id="mapListDisplay" class="display-list"></ul>
+        <div id="mapSizeDisplay" class="size-display">Size: 0</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
