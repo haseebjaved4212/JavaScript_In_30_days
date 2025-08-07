@@ -239,16 +239,24 @@ These functions use` productMap.set()`, `productMap.get()`, and `productMap.dele
 
 
 
-## ✅ Practice Set Solutions:
+## ✅ Practice Set :
 
-Here are the solutions to the practice problems.
 
-1. Remove Duplicates from Array (Set):
+<details >
+<summary>1. Remove Duplicates from Array (Set):
+</summary>
+
+```js
 const numbersWithDuplicates = [1, 2, 3, 2, 4, 1, 5];
 const uniqueNumbers = [...new Set(numbersWithDuplicates)]; // Convert Set back to Array
 console.log(uniqueNumbers); // Output: [1, 2, 3, 4, 5]
-
+```
+</details >
+<details ><summary>
 2. Count Character Frequencies (Map):
+</summary>
+
+```js
 const text = "hello world";
 const charFrequencies = new Map();
 
@@ -258,8 +266,13 @@ for (const char of text) {
 }
 console.log(charFrequencies);
 // Output: Map(7) {"h" => 1, "e" => 1, "l" => 3, "o" => 2, "w" => 1, "r" => 1, "d" => 1}
-
+```
+</details >
+<details ><summary>
 3. Store Object as Map Key:
+</summary>
+
+```js
 const user1 = { id: 1, name: 'Alice' };
 const user2 = { id: 2, name: 'Bob' };
 
@@ -268,7 +281,10 @@ userScores.set(user1, 95);
 userScores.set(user2, 88);
 
 console.log(userScores.get(user1)); // Output: 95
+```
+</details >
 
+--- 
 ## 💡 Key Takeaways for Day 14:
 - Set is ideal for storing collections of unique values. It's great for quickly checking if an item exists or removing duplicates.
 
