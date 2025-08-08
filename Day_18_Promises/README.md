@@ -129,8 +129,8 @@ The index.js file contains the logic for creating and consuming our fake API Pro
 
 
 
-✅ Practice Set Solutions:
-Here are the solutions to the practice problems.
+## ✅ Practice Set :
+
 <details ><summary >
 1. Promise Chaining:
 </summary>
