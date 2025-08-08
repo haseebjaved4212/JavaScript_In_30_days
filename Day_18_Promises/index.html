@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 18: Promises</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #1f2937 0%, #0c1524 100%);
+      color: #e5e7eb;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background-color: #111827;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid #374151;
+      text-align: center;
+    }
+
+    h1 {
+      color: #63b3ed;
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      background: linear-gradient(45deg, #4299e1, #3182ce);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #failBtn {
+      background: linear-gradient(45deg, #f56565, #e53e3e);
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .action-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    #failBtn:hover {
+      background: linear-gradient(45deg, #e53e3e, #c53030);
+    }
+
+    .results-panel {
+      background-color: #1f2937;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #374151;
+      min-height: 150px;
+      text-align: left;
+    }
+
+    .results-panel h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #a7f3d0;
+      border-bottom: 2px solid #34d399;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .status-message {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    .loading {
+      color: #f6ad55;
+      animation: pulse 1.5s infinite;
+    }
+
+    .success {
+      color: #48bb78;
+    }
+
+    .error {
+      color: #f56565;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Promises: Fake API Data Fetcher</h1>
+    <p class="text-gray-400 mb-6">Click a button to simulate an asynchronous API call and see how Promises handle
+      success and failure.</p>
+
+    <div class="controls">
+      <button id="successBtn" class="action-btn">Fetch Data (Success)</button>
+      <button id="failBtn" class="action-btn">Fetch Data (Fail)</button>
+    </div>
+
+    <div class="results-panel">
+      <h2>API Call Status</h2>
+      <div id="status" class="status-message">Ready. Click a button to start.</div>
+      <pre id="output" class="mt-4 text-gray-300"></pre>
+    </div>
+  </div>
+
+  
+</body>
+
+</html>
