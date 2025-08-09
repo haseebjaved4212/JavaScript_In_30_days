@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: #111827;
+      color: #e5e7eb;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      /* Needed for the absolute positioned background */
+      overflow: hidden;
+      /* Hide any overflow from the background image */
+    }
+
+    /* New CSS for the dynamic background */
+    #weather-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      /* Place it behind the main content */
+      background-size: cover;
+      background-position: center;
+      transition: background-image 0.5s ease-in-out;
+      filter: brightness(0.5);
+      /* Dim the background image */
+    }
+
+    /* Default gradient background */
+    #weather-background.default {
+      background-image: linear-gradient(135deg, #1f2937 0%, #0c1524 100%);
+    }
+
+    /* Specific weather backgrounds */
+    #weather-background.sunny {
+      background-image: url('https://placehold.co/1920x1080/4FD1C5/FFFFFF?text=Sunny+Skies');
+    }
+
+    #weather-background.cloudy {
+      background-image: url('https://placehold.co/1920x1080/A0AEC0/FFFFFF?text=Cloudy+Weather');
+    }
+
+    #weather-background.hot {
+      background-image: url('https://placehold.co/1920x1080/E53E3E/FFFFFF?text=Hot+Day');
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background-color: rgba(17, 24, 39, 0.85);
+      /* Semi-transparent background */
+      backdrop-filter: blur(10px);
+      /* Add a blur effect */
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid #374151;
+      text-align: center;
+    }
+
+    h1 {
+      color: #63b3ed;
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .weather-panel {
+      background-color: #1f2937;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #374151;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .weather-panel h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #a7f3d0;
+    }
+
+    .weather-panel p {
+      font-size: 1.1rem;
+    }
+
+    .loading-spinner {
+      border: 4px solid #374151;
+      border-top: 4px solid #63b3ed;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .error-message {
+      color: #f56565;
+      font-weight: bold;
+    }
+
+    #weatherForm {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    #cityInput {
+      flex-grow: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #374151;
+      background-color: #374151;
+      color: #e5e7eb;
+      font-size: 1rem;
+    }
+
+    #cityInput:focus {
+      outline: none;
+      border-color: #63b3ed;
+      box-shadow: 0 0 0 2px rgba(99, 179, 237, 0.5);
+    }
+
+    #fetchBtn {
+      background: linear-gradient(45deg, #4299e1, #3182ce);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #fetchBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- The new background element -->
+  <div id="weather-background" class="default"></div>
+
+  <div class="container">
+    <h1>Weather App</h1>
+    <p class="text-gray-400 mb-6">Enter a city to get its current (fake) weather.</p>
+
+    <form id="weatherForm">
+      <input type="text" id="cityInput" placeholder="Enter city name (e.g., London)" required>
+      <button type="submit" id="fetchBtn">Get Weather</button>
+    </form>
+
+    <div id="weatherDisplay" class="weather-panel">
+      <p>Enter a city and click 'Get Weather' to begin.</p>
+    </div>
+  </div>
+
+  
+</body>
+
+</html>
