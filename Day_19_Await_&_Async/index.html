@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather App</title>
+  <title>Day 20: Real-Time Weather App</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for Inter -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
   <style>
     body {
       font-family: "Inter", sans-serif;
@@ -18,12 +21,9 @@
       align-items: center;
       padding: 20px;
       position: relative;
-      /* Needed for the absolute positioned background */
       overflow: hidden;
-      /* Hide any overflow from the background image */
     }
 
-    /* New CSS for the dynamic background */
     #weather-background {
       position: absolute;
       top: 0;
@@ -31,12 +31,10 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      /* Place it behind the main content */
       background-size: cover;
       background-position: center;
       transition: background-image 0.5s ease-in-out;
       filter: brightness(0.5);
-      /* Dim the background image */
     }
 
     /* Default gradient background */
@@ -44,26 +42,40 @@
       background-image: linear-gradient(135deg, #1f2937 0%, #0c1524 100%);
     }
 
-    /* Specific weather backgrounds */
-    #weather-background.sunny {
-      background-image: url('https://placehold.co/1920x1080/4FD1C5/FFFFFF?text=Sunny+Skies');
+    /* Specific weather backgrounds with placeholder images */
+    #weather-background.clear {
+      background-image: url('https://placehold.co/1920x1080/4299E1/FFFFFF?text=Clear+Skies');
     }
 
-    #weather-background.cloudy {
+    #weather-background.clouds {
       background-image: url('https://placehold.co/1920x1080/A0AEC0/FFFFFF?text=Cloudy+Weather');
     }
 
-    #weather-background.hot {
-      background-image: url('https://placehold.co/1920x1080/E53E3E/FFFFFF?text=Hot+Day');
+    #weather-background.rain,
+    #weather-background.drizzle {
+      background-image: url('https://placehold.co/1920x1080/3182CE/FFFFFF?text=Rainy+Day');
+    }
+
+    #weather-background.thunderstorm {
+      background-image: url('https://placehold.co/1920x1080/4A5568/FFFFFF?text=Thunderstorms');
+    }
+
+    #weather-background.snow {
+      background-image: url('https://placehold.co/1920x1080/E2E8F0/1A202C?text=Snowy+Weather');
+    }
+
+    #weather-background.mist,
+    #weather-background.smoke,
+    #weather-background.haze,
+    #weather-background.fog {
+      background-image: url('https://placehold.co/1920x1080/4A5568/FFFFFF?text=Misty+Conditions');
     }
 
     .container {
       max-width: 600px;
       width: 100%;
       background-color: rgba(17, 24, 39, 0.85);
-      /* Semi-transparent background */
       backdrop-filter: blur(10px);
-      /* Add a blur effect */
       padding: 30px;
       border-radius: 16px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -170,12 +182,11 @@
 </head>
 
 <body>
-  <!-- The new background element -->
   <div id="weather-background" class="default"></div>
 
   <div class="container">
-    <h1>Weather App</h1>
-    <p class="text-gray-400 mb-6">Enter a city to get its current (fake) weather.</p>
+    <h1>Real-Time Weather App</h1>
+    <p class="text-gray-400 mb-6">Enter a city to get its current weather from a real API.</p>
 
     <form id="weatherForm">
       <input type="text" id="cityInput" placeholder="Enter city name (e.g., London)" required>
@@ -187,7 +198,7 @@
     </div>
   </div>
 
-  
+  <script src="index.js"></script>
 </body>
 
 </html>
