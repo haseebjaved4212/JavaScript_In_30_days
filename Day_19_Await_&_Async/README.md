@@ -84,7 +84,7 @@ Today's project is a simple web page that allows you to get fake weather data fo
 
 - Loading State: The UI will display a loading message while the await call is pending.
 
-- Error Handling: A try...catch block will elegantly handle failed API requests and display a user-friendly error message.
+- Error Handling: A `try...catch` block will elegantly handle failed API requests and display a user-friendly error message.
 
 - Dynamic UI: The results will be dynamically rendered in the UI, showing the city, temperature, and a description.
 
@@ -112,7 +112,7 @@ The index.js file contains the logic for fetching and displaying the weather dat
 
 - It uses a try...catch block to handle the asynchronous operation.
 
--Inside try, it uses await fakeApiCall(city) to wait for the Promise to resolve.
+- Inside `try`, it uses await fakeApiCall(city) to wait for the Promise to resolve.
 
 - If the await succeeds, it updates the UI with the fetched weather data.
 
@@ -126,10 +126,13 @@ The index.js file contains the logic for fetching and displaying the weather dat
 
 
 
-✅ Practice Set Solutions:
-Here are the solutions to the practice problems.
+## ✅ Practice Set :
 
+<details ><summary >
 1. Awaiting Multiple Promises with Promise.all:
+</summary>
+
+```js
 async function getUserId() {
     return new Promise(resolve => setTimeout(() => resolve(123), 1000));
 }
@@ -149,8 +152,13 @@ async function getCombinedData() {
 }
 
 getCombinedData();
-
+```
+</details>
+<details ><summary >
 2. Chaining async functions:
+</summary>
+
+```js
 async function fetchUserData(id) {
     return new Promise(resolve => setTimeout(() => resolve({ id: id, name: 'Alice' }), 1000));
 }
@@ -171,7 +179,8 @@ async function fetchAllUserData() {
 }
 
 fetchAllUserData();
-
+```
+</details>
 
 --- 
 ## 💡 Key Takeaways for Day 19:
