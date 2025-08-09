@@ -135,7 +135,7 @@ The index.js file contains the logic for creating and consuming our fake API Pro
 1. Promise Chaining:
 </summary>
 
-    ```js
+```js
 function getUser(id) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -162,13 +162,14 @@ getUser(1)
     .catch(error => {
         console.error('An error occurred:', error);
     });
-    ```
+
+```
 </details>
 <details ><summary >
 2. Promise.all():
 </summary>
 
-    ```js
+```js
 const promise1 = new Promise(resolve => {
     setTimeout(() => resolve(10), 1000);
 });
@@ -184,10 +185,12 @@ Promise.all([promise1, promise2])
     .catch(error => {
         console.error('One of the promises failed:', error);
     });
+
 ```
 </details>
 
 --- 
+
 ## 💡 Key Takeaways for Day 18:
 - A Promise is an object for handling asynchronous operations, providing a cleaner alternative to callbacks.
 
