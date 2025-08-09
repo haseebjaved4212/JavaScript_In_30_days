@@ -103,7 +103,8 @@ The JavaScript is the brain of the application, managing all the interactions an
 
 - **Progress Bar:** The audio object has an event listener for timeupdate that continuously updates the progress bar's width and the time display. There is also a click event listener on the progress bar container, which calculates where the user clicked and uses that to update the audio.currentTime, allowing seeking.
 
-- **Adding Songs:** The hidden &lt;input type="file"> element has a change event listener. When you select a file, it reads the file, creates a temporary URL for it using URL.createObjectURL(), and pushes a new song object with that URL into the songs array. This makes the player able to handle local files without a server.
+- **Adding Songs:** 
+The hidden &lt;input type="file"> element has a change event listener. When you select a file, it reads the file, creates a temporary URL for it using URL.createObjectURL(), and pushes a new song object with that URL into the songs array. This makes the player able to handle local files without a server.
 
 - **Playlist UI:** Event listeners on the "Playlist" button and a separate "Close" button toggle the open class on the playlistModal element, which makes it slide in or out of view. The updatePlaylistUI() function rebuilds the list of songs in the modal whenever a new song is added, ensuring it's always up-to-date.
 
