@@ -4,201 +4,424 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day 20: Real-Time Weather App</title>
-  <!-- Tailwind CSS CDN -->
+  <title>Dynamic Music Player</title>
+  <!-- Tailwind CSS for modern styling -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts for Inter -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
     body {
-      font-family: "Inter", sans-serif;
-      background: #111827;
-      color: #e5e7eb;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
     }
 
-    #weather-background {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .music-player-container {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .album-art-container {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .album-art-container.playing .album-art {
+      animation: spin 10s linear infinite;
+    }
+
+    .album-art {
       width: 100%;
       height: 100%;
-      z-index: -1;
-      background-size: cover;
-      background-position: center;
-      transition: background-image 0.5s ease-in-out;
-      filter: brightness(0.5);
-    }
-
-    /* Default gradient background */
-    #weather-background.default {
-      background-image: linear-gradient(135deg, #1f2937 0%, #0c1524 100%);
-    }
-
-    /* Specific weather backgrounds with placeholder images */
-    #weather-background.clear {
-      background-image: url('https://placehold.co/1920x1080/4299E1/FFFFFF?text=Clear+Skies');
-    }
-
-    #weather-background.clouds {
-      background-image: url('https://placehold.co/1920x1080/A0AEC0/FFFFFF?text=Cloudy+Weather');
-    }
-
-    #weather-background.rain,
-    #weather-background.drizzle {
-      background-image: url('https://placehold.co/1920x1080/3182CE/FFFFFF?text=Rainy+Day');
-    }
-
-    #weather-background.thunderstorm {
-      background-image: url('https://placehold.co/1920x1080/4A5568/FFFFFF?text=Thunderstorms');
-    }
-
-    #weather-background.snow {
-      background-image: url('https://placehold.co/1920x1080/E2E8F0/1A202C?text=Snowy+Weather');
-    }
-
-    #weather-background.mist,
-    #weather-background.smoke,
-    #weather-background.haze,
-    #weather-background.fog {
-      background-image: url('https://placehold.co/1920x1080/4A5568/FFFFFF?text=Misty+Conditions');
-    }
-
-    .container {
-      max-width: 600px;
-      width: 100%;
-      background-color: rgba(17, 24, 39, 0.85);
-      backdrop-filter: blur(10px);
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      border: 1px solid #374151;
-      text-align: center;
-    }
-
-    h1 {
-      color: #63b3ed;
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    .weather-panel {
-      background-color: #1f2937;
-      padding: 20px;
-      border-radius: 8px;
-      border: 1px solid #374151;
-      min-height: 200px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .weather-panel h2 {
-      font-size: 2rem;
-      font-weight: 600;
-      color: #a7f3d0;
-    }
-
-    .weather-panel p {
-      font-size: 1.1rem;
-    }
-
-    .loading-spinner {
-      border: 4px solid #374151;
-      border-top: 4px solid #63b3ed;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
+      object-fit: cover;
+      transition: opacity 0.5s ease-in-out;
     }
 
     @keyframes spin {
-      0% {
+      from {
         transform: rotate(0deg);
       }
 
-      100% {
+      to {
         transform: rotate(360deg);
       }
     }
 
-    .error-message {
-      color: #f56565;
-      font-weight: bold;
-    }
-
-    #weatherForm {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-
-    #cityInput {
-      flex-grow: 1;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #374151;
-      background-color: #374151;
-      color: #e5e7eb;
-      font-size: 1rem;
-    }
-
-    #cityInput:focus {
-      outline: none;
-      border-color: #63b3ed;
-      box-shadow: 0 0 0 2px rgba(99, 179, 237, 0.5);
-    }
-
-    #fetchBtn {
-      background: linear-gradient(45deg, #4299e1, #3182ce);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 1rem;
-      transition: all 0.2s ease-in-out;
+    .progress-bar-container {
       cursor: pointer;
-      border: none;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      height: 8px;
+      background-color: #4a5568;
+      border-radius: 9999px;
     }
 
-    #fetchBtn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #6366f1, #a855f7);
+      border-radius: 9999px;
+      transition: width 0.1s linear;
+    }
+
+    .playlist-modal {
+      transform: translateX(100%);
+      transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      z-index: 10;
+    }
+
+    .playlist-modal.open {
+      transform: translateX(0);
+    }
+
+    .playlist-item:hover {
+      background-color: #3f4552;
+      transform: translateX(5px);
+    }
+
+    .playlist-item.active {
+      background-color: #4a5568;
+      border-left: 4px solid #a855f7;
+    }
+
+    .control-btn {
+      transition: all 0.2s ease-in-out;
+    }
+
+    .control-btn:hover {
+      transform: scale(1.1);
+      color: #a855f7;
+    }
+
+    .control-btn:active {
+      transform: scale(0.95);
     }
   </style>
 </head>
 
-<body>
-  <div id="weather-background" class="default"></div>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4">
 
-  <div class="container">
-    <h1>Real-Time Weather App</h1>
-    <p class="text-gray-400 mb-6">Enter a city to get its current weather from a real API.</p>
+  <!-- Music Player Container -->
+  <div class="music-player-container w-full max-w-md p-8 rounded-2xl flex flex-col items-center relative">
 
-    <form id="weatherForm">
-      <input type="text" id="cityInput" placeholder="Enter city name (e.g., London)" required>
-      <button type="submit" id="fetchBtn">Get Weather</button>
-    </form>
+    <!-- Header -->
+    <h1 class="text-3xl font-bold mb-4 text-purple-400 drop-shadow-lg">Music Player</h1>
 
-    <div id="weatherDisplay" class="weather-panel">
-      <p>Enter a city and click 'Get Weather' to begin.</p>
+    <!-- Album Art -->
+    <div id="albumArtContainer" class="album-art-container mt-4 mb-8">
+      <img id="albumArt" src="https://placehold.co/250x250/2d3748/ffffff?text=Music" alt="Album Art" class="album-art">
+    </div>
+
+    <!-- Song Info -->
+    <div class="text-center mb-6">
+      <h2 id="songTitle" class="text-2xl font-bold mb-1 truncate w-64 md:w-80">Title</h2>
+      <h3 id="songArtist" class="text-lg text-gray-400 truncate w-64 md:w-80">Artist</h3>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progressBarContainer" class="progress-bar-container w-full mb-4">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+    <div class="flex justify-between w-full text-xs text-gray-400 mb-6">
+      <span id="currentTime">0:00</span>
+      <span id="duration">0:00</span>
+    </div>
+
+    <!-- Player Controls -->
+    <div class="flex items-center justify-center gap-8 mb-6">
+      <!-- Updated Previous Button SVG -->
+      <button id="prevBtn" class="control-btn p-3 rounded-full text-gray-300 hover:bg-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M11 5l-7 7 7 7v-4.8l-3.2-3.2 3.2-3.2V5zm4-2v18h2V3h-2z" />
+        </svg>
+      </button>
+      <button id="playPauseBtn"
+        class="control-btn p-5 rounded-full bg-purple-500 hover:bg-purple-600 text-white shadow-xl">
+        <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+        <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 hidden" viewBox="0 0 24 24"
+          fill="currentColor">
+          <path d="M6 19h4V5H6zm8-14v14h4V5z" />
+        </svg>
+      </button>
+      <!-- Updated Next Button SVG -->
+      <button id="nextBtn" class="control-btn p-3 rounded-full text-gray-300 hover:bg-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M13 19l7-7-7-7v4.8l3.2 3.2-3.2 3.2V19zm-4 2V3H7v18h2z" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Add Song & Playlist Buttons -->
+    <div class="flex justify-center gap-4 w-full">
+      <label for="addSongInput"
+        class="w-1/2 flex items-center justify-center p-3 rounded-xl bg-gray-700 hover:bg-gray-600 transition-all cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        <span>Add Song</span>
+      </label>
+      <input type="file" id="addSongInput" accept="audio/*" class="hidden">
+      <button id="togglePlaylistBtn"
+        class="w-1/2 flex items-center justify-center p-3 rounded-xl bg-gray-700 hover:bg-gray-600 transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <span>Playlist</span>
+      </button>
     </div>
   </div>
 
-  <script src="index.js"></script>
+  <!-- Playlist Modal -->
+  <div id="playlistModal"
+    class="playlist-modal fixed top-0 right-0 w-full md:w-1/3 min-h-screen bg-gray-800 border-l border-gray-700 p-6 flex flex-col">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-purple-400">Playlist</h2>
+      <button id="closePlaylistBtn" class="p-2 text-gray-400 hover:text-white transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div id="playlist" class="flex-grow overflow-y-auto space-y-2">
+      <!-- Playlist items will be added here dynamically -->
+    </div>
+  </div>
+
+  <script>
+    // --- Core Music Player Logic ---
+    // The songs array is now empty by default.
+    const songs = [];
+
+    let currentSongIndex = 0;
+    let isPlaying = false;
+    const audio = new Audio();
+
+    // --- DOM Elements ---
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const songTitle = document.getElementById('songTitle');
+    const songArtist = document.getElementById('songArtist');
+    const albumArt = document.getElementById('albumArt');
+    const albumArtContainer = document.getElementById('albumArtContainer');
+    const progressBar = document.getElementById('progressBar');
+    const progressBarContainer = document.getElementById('progressBarContainer');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
+    const addSongInput = document.getElementById('addSongInput');
+    const playlistModal = document.getElementById('playlistModal');
+    const togglePlaylistBtn = document.getElementById('togglePlaylistBtn');
+    const closePlaylistBtn = document.getElementById('closePlaylistBtn');
+    const playlistEl = document.getElementById('playlist');
+
+    /**
+     * Loads a song into the audio player and updates the UI.
+     * @param {number} index The index of the song in the `songs` array.
+     */
+    function loadSong(index) {
+      if (songs.length === 0) {
+        // If there are no songs, reset UI
+        songTitle.textContent = "No Songs Added";
+        songArtist.textContent = "";
+        albumArt.src = "https://placehold.co/250x250/2d3748/ffffff?text=Music";
+        progressBar.style.width = '0%';
+        currentTimeEl.textContent = '0:00';
+        durationEl.textContent = '0:00';
+        pauseSong(); // Stop playback
+        return;
+      }
+
+      const song = songs[index];
+      audio.src = song.src;
+      songTitle.textContent = song.title;
+      songArtist.textContent = song.artist;
+      albumArt.src = song.albumArt || "https://placehold.co/250x250/2d3748/ffffff?text=Music";
+      // Highlight the active song in the playlist
+      updatePlaylistUI();
+    }
+
+    /**
+     * Plays the current song and updates the UI state.
+     */
+    function playSong() {
+      if (songs.length === 0) {
+        // Cannot play if no songs are added
+        console.log("No songs to play.");
+        return;
+      }
+      isPlaying = true;
+      playIcon.classList.add('hidden');
+      pauseIcon.classList.remove('hidden');
+      albumArtContainer.classList.add('playing');
+      audio.play();
+    }
+
+    /**
+     * Pauses the current song and updates the UI state.
+     */
+    function pauseSong() {
+      isPlaying = false;
+      playIcon.classList.remove('hidden');
+      pauseIcon.classList.add('hidden');
+      albumArtContainer.classList.remove('playing');
+      audio.pause();
+    }
+
+    /**
+     * Plays the previous song in the playlist.
+     */
+    function prevSong() {
+      if (songs.length === 0) return;
+      currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+      loadSong(currentSongIndex);
+      playSong();
+    }
+
+    /**
+     * Plays the next song in the playlist.
+     */
+    function nextSong() {
+      if (songs.length === 0) return;
+      currentSongIndex = (currentSongIndex + 1) % songs.length;
+      loadSong(currentSongIndex);
+      playSong();
+    }
+
+    /**
+     * Updates the progress bar and current time display.
+     */
+    function updateProgress() {
+      const { duration, currentTime } = audio;
+      const progressPercent = (currentTime / duration) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+
+      // Format and display the current time and duration
+      const formatTime = (time) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      };
+      currentTimeEl.textContent = formatTime(currentTime);
+      if (duration) {
+        durationEl.textContent = formatTime(duration);
+      }
+    }
+
+    /**
+     * Allows the user to seek to a new position in the song.
+     * @param {Event} e The click event on the progress bar.
+     */
+    function setProgress(e) {
+      if (songs.length === 0) return;
+      const width = progressBarContainer.clientWidth;
+      const clickX = e.offsetX;
+      const duration = audio.duration;
+      audio.currentTime = (clickX / width) * duration;
+    }
+
+    /**
+     * Creates and appends a list item for a song to the playlist.
+     * @param {object} song The song object.
+     * @param {number} index The index of the song.
+     */
+    function createPlaylistItem(song, index) {
+      const li = document.createElement('div');
+      li.className = `playlist-item flex items-center p-3 rounded-lg cursor-pointer transition-all ${index === currentSongIndex ? 'active' : ''}`;
+      li.dataset.index = index;
+      li.innerHTML = `
+                <img src="${song.albumArt || "https://placehold.co/50x50/2d3748/ffffff?text=Music"}" alt="Album Art" class="w-10 h-10 rounded-md mr-4">
+                <div class="flex-grow truncate">
+                    <h4 class="font-semibold text-sm truncate">${song.title}</h4>
+                    <p class="text-xs text-gray-400 truncate">${song.artist}</p>
+                </div>
+            `;
+      li.addEventListener('click', () => {
+        currentSongIndex = index;
+        loadSong(currentSongIndex);
+        playSong();
+      });
+      playlistEl.appendChild(li);
+    }
+
+    /**
+     * Updates the playlist UI to highlight the current song.
+     */
+    function updatePlaylistUI() {
+      playlistEl.innerHTML = '';
+      songs.forEach((song, index) => createPlaylistItem(song, index));
+    }
+
+    // --- Event Listeners ---
+    playPauseBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        pauseSong();
+      } else {
+        playSong();
+      }
+    });
+
+    prevBtn.addEventListener('click', prevSong);
+    nextBtn.addEventListener('click', nextSong);
+
+    audio.addEventListener('timeupdate', updateProgress);
+    audio.addEventListener('ended', nextSong);
+    audio.addEventListener('loadedmetadata', () => {
+      durationEl.textContent = formatTime(audio.duration);
+    });
+
+    progressBarContainer.addEventListener('click', setProgress);
+
+    addSongInput.addEventListener('change', (event) => {
+      const files = event.target.files;
+      if (files.length > 0) {
+        const file = files[0];
+        const newSong = {
+          title: file.name.split('.').slice(0, -1).join('.'),
+          artist: 'Local File',
+          src: URL.createObjectURL(file),
+          albumArt: "https://placehold.co/250x250/2d3748/ffffff?text=Local+File"
+        };
+        songs.push(newSong);
+        updatePlaylistUI();
+        // If this is the first song, load and play it automatically
+        if (songs.length === 1) {
+          currentSongIndex = 0;
+          loadSong(currentSongIndex);
+          playSong();
+        }
+      }
+    });
+
+    togglePlaylistBtn.addEventListener('click', () => {
+      playlistModal.classList.toggle('open');
+    });
+
+    closePlaylistBtn.addEventListener('click', () => {
+      playlistModal.classList.remove('open');
+    });
+
+    // --- Initial Setup ---
+    window.onload = function () {
+      loadSong(currentSongIndex);
+      updatePlaylistUI();
+    }
+
+    function formatTime(time) {
+      const minutes = Math.floor(time / 60);
+      const seconds = Math.floor(time % 60);
+      return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+  </script>
 </body>
 
 </html>
