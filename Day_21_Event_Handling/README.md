@@ -52,7 +52,7 @@ While there are many types of events, these are some of the most frequently used
 
 **4. Event Flow: Bubbling & Capturing**
 
-Events don't just happen on a single element; they travel through the DOM tree. There are two phases to this journey:
+- Events don't just happen on a single element; they travel through the DOM tree. There are two phases to this journey:
 
 - **Capturing Phase:** The event starts at the top of the DOM tree (the window object) and travels down to the target element.
 
@@ -60,28 +60,15 @@ Events don't just happen on a single element; they travel through the DOM tree. 
 
 By default, event listeners trigger in the bubbling phase. Understanding event flow is crucial for advanced topics like event delegation, where you can listen for events on a parent element instead of every child element.
 
-Practice Set 🚀
-Here are a few quick exercises to help you solidify your understanding of event handling. Try to build a simple HTML file for each one and see if you can get it working!
 
-Button Text Changer: Create an HTML button and a paragraph element. When the button is clicked, change the text of the paragraph to "You clicked the button!".
 
-Color Hover: Create a div element. When the mouse hovers over it (mouseover), change its background color to blue. When the mouse leaves (mouseout), change it back to its original color.
+ ## ✅ Practice Set
+<details ><summary >
+1. Button Text Changer.
 
-Basic Form Validation: Create a form with a single text input and a submit button. Add a submit event listener to the form. Use event.preventDefault() to stop the page from refreshing. Log the value of the input to the console instead.
+</summary>
 
-## Key Takeaways ✨
-The `addEventListener()` method is your primary tool for listening for events.
-
-- The Event object is your key to getting information about what happened, like the element that was clicked.
-
-- Always be aware of the default behavior of elements (like a form submitting) and use `event.preventDefault()` when you need to stop it.
-
-- Events have a bubbling phase, which is how they propagate up the DOM tree from the target element.
-
-Solutions ✅
-Here are the complete, self-contained solutions for each of the practice problems. You can copy and paste the code for each into a new HTML file and open it in your browser to see it work.
-
-1. Button Text Changer
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,8 +97,14 @@ Here are the complete, self-contained solutions for each of the practice problem
 
 </body>
 </html>
+```
+</details>
+<details ><summary >
+2. Color Hover.
 
-2. Color Hover
+</summary>
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,8 +141,12 @@ Here are the complete, self-contained solutions for each of the practice problem
 
 </body>
 </html>
+```
+</details><details ><summary>
+3. Basic Form Validation.
+</summary>
 
-3. Basic Form Validation
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -187,3 +184,15 @@ Here are the complete, self-contained solutions for each of the practice problem
 
 </body>
 </html>
+```
+</details>
+
+--- 
+## Key Takeaways ✨
+- The `addEventListener()` method is your primary tool for listening for events.
+
+- The Event object is your key to getting information about what happened, like the element that was clicked.
+
+- Always be aware of the default behavior of elements (like a form submitting) and use `event.preventDefault()` when you need to stop it.
+
+- Events have a bubbling phase, which is how they propagate up the DOM tree from the target element.
