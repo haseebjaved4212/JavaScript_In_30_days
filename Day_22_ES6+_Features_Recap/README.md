@@ -79,60 +79,33 @@ function greet(name = 'Guest') {
 console.log(greet('Charlie')); // "Hello, Charlie!"
 console.log(greet()); // "Hello, Guest!"
 ```
+## Practice Set:
+<details>
+<summary >
+1. Create a function named createUserSummary.
 
+ It should accept a name and a variable number of hobbies.
 
-Practice Set
-Your task is to create a function that takes a name and a list of hobbies and returns a formatted string.
+ The name parameter should have a default value of 'Anonymous'.
 
-The Challenge:
+ The function should use a rest parameter to collect all the hobbies into an array.
 
-Create a function named createUserSummary.
+ Inside the function, use a template literal to return a string that includes the user's name and a list of their hobbies. If there are no hobbies, the message should say so.
 
-It should accept a name and a variable number of hobbies.
+ Call the function with and without hobbies to test both scenarios.
+</summary>
 
-The name parameter should have a default value of 'Anonymous'.
+```js
 
-The function should use a rest parameter to collect all the hobbies into an array.
-
-Inside the function, use a template literal to return a string that includes the user's name and a list of their hobbies. If there are no hobbies, the message should say so.
-
-Call the function with and without hobbies to test both scenarios.
-
-Solution
-// --- Practice Set Solution ---
-
-/**
- * Creates a summary string for a user, including their name and a list of hobbies.
- * @param {string} name - The user's name. Defaults to 'Anonymous'.
- * @param {...string} hobbies - A variable number of hobbies.
- * @returns {string} A formatted summary string.
- */
 function createUserSummary(name = 'Anonymous', ...hobbies) {
-    // Check if the hobbies array is empty
     const hobbiesText = hobbies.length > 0
-        ? hobbies.join(', ') // Use .join() to create a nice comma-separated list
+        ? hobbies.join(', ')
         : 'no hobbies listed';
 
-    // Use a template literal to construct the final string.
     return `User: ${name}. Hobbies: ${hobbiesText}.`;
 }
-
-// Example 1: Calling with a name and hobbies
-const summary1 = createUserSummary('Diana', 'Reading', 'Hiking', 'Cooking');
-console.log(summary1); // "User: Diana. Hobbies: Reading, Hiking, Cooking."
-
-// Example 2: Calling with just a name (using the rest operator)
-const summary2 = createUserSummary('Evan');
-console.log(summary2); // "User: Evan. Hobbies: no hobbies listed."
-
-// Example 3: Calling without any arguments (using both default and rest)
-const summary3 = createUserSummary();
-console.log(summary3); // "User: Anonymous. Hobbies: no hobbies listed."
-
-// Example 4: Using the spread operator to pass an array of hobbies
-const myHobbies = ['Coding', 'Cycling'];
-const summary4 = createUserSummary('Frank', ...myHobbies);
-console.log(summary4); // "User: Frank. Hobbies: Coding, Cycling."
+``` 
+</details>
 
 ## Key Takeaways
 
