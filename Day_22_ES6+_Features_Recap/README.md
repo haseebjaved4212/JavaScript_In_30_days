@@ -79,6 +79,39 @@ function greet(name = 'Guest') {
 console.log(greet('Charlie')); // "Hello, Charlie!"
 console.log(greet()); // "Hello, Guest!"
 ```
+
+## Simple Shopping Cart: A Deep Dive into ES6+ for State Management
+
+**Introduction**
+
+Welcome to Day 22! Today, we're building a functional shopping cart. This project is a fantastic demonstration of why modern JavaScript features are so powerful, especially for managing the state of an application. We'll use Template Literals, the Spread Operator, and Default Parameters to create an interactive cart that handles adding items, calculating totals, and managing quantities.
+
+**Features**
+
+- Product Catalog: A static list of products with prices.
+
+- Add to Cart: Buttons to add a product to the cart.
+
+- Dynamic Cart Display: The cart updates in real-time as you add items.
+
+- Total Price: The total cost of all items in the cart is automatically calculated and displayed.
+
+**Key JavaScript Concepts in Action**
+
+**1. Spread Operator (...)**
+
+The spread operator is the star of this project. We'll use it to handle state updates in an immutable way. Instead of directly modifying our cart array (which can lead to bugs), we'll use the spread operator to create a new array every time we add or update an item. For example, to add a new item, we'll write [...cart, newItem], which is much cleaner and safer than `cart.push(newItem)`.
+
+
+**2. Template Literals**
+
+We'll rely heavily on template literals (strings enclosed by backticks ``) to render the products and the items in the shopping cart. This allows us to embed HTML and JavaScript variables directly into a string, which makes our rendering logic much more readable and concise.
+
+**3. Default Parameters**
+
+We'll use a default parameter in our `addToCart` function to set a default quantity of 1 for new items. This makes the function more robust and flexible, as it can be called with or without a quantity argument.
+
+
 ## Practice Set:
 <details>
 <summary >
