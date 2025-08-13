@@ -57,8 +57,8 @@ console.log(greeting); // "Hello from the default export!"
 
 ## Practice Set:
 
-
- Modular Greeting App
+<details><summary>
+1. Modular Greeting App
 
 Your task is to create a simple greeting app that uses modules to separate its logic.
 
@@ -69,11 +69,14 @@ main.js: Create a second file that imports the generateGreeting function from gr
 index.html: Create an HTML file with a button and a paragraph element. Add a script tag with type="module" that links to your main.js.
 
 Connect it all: In main.js, add a click event listener to the button. When clicked, it should use the imported generateGreeting function to create a greeting and display it in the paragraph element.
+</summary>
 
-Solution
+**solution**
+
 This solution requires three separate files. You can create them in the same folder and open index.html in your browser to see the result.
 
 File 1: greeting.js
+```js
 // greeting.js
 
 // This file exports a single function as a named export.
@@ -81,8 +84,9 @@ export function generateGreeting(name) {
     // We use a template literal for a clean, readable string.
     return `Hello, ${name}! Welcome to the modular world.`;
 }
-
+```
 File 2: main.js
+```js
 // main.js
 
 // Import the named export 'generateGreeting' from the greeting.js file.
@@ -104,7 +108,7 @@ greetButton.addEventListener('click', () => {
     // Display the greeting on the page
     greetingOutput.textContent = greetingText;
 });
-
+```
 File 3: index.html
 ```html
 <!DOCTYPE html>
@@ -140,11 +144,16 @@ File 3: index.html
 </body>
 </html>
 ```
-Key Takeaways ✨
-Organization: Modules keep your code clean by separating different functionalities into their own files.
+</details>
 
-No Global Scope Pollution: Variables in a module are local to that module unless explicitly exported.
 
-Reusability: You can reuse the same module in many different parts of your application.
+--- 
+## Key Takeaways ✨
 
-Syntax: Use export to share code and import to use it. Remember to include type="module" in your script tag when linking to the main module file.
+- Organization: Modules keep your code clean by separating different functionalities into their own files.
+
+- No Global Scope Pollution: Variables in a module are local to that module unless explicitly exported.
+
+- Reusability: You can reuse the same module in many different parts of your application.
+
+- Syntax: Use export to share code and import to use it. Remember to include type="module" in your script tag when linking to the main module file.
