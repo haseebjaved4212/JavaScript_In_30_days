@@ -55,6 +55,35 @@ console.log(greeting); // "Hello from the default export!"
 
 - *Important:* When using ES Modules in the browser, you must add type="module" to your script tag: &lt;script type="module" src="index.js"></script>.
 
+
+## 📌 Todo List App — ES6 Modules Version
+
+**📖 Overview**
+
+This is a modern Todo List App built with HTML, CSS, and JavaScript (ES6 modules).
+The project demonstrates how to organize code into separate modules and import/export functionalities for better readability, maintainability, and scalability.
+
+**✨ Features**
+
+- ✅ Add new tasks
+
+- ✏️ Edit existing tasks
+
+- ❌ Delete tasks
+
+- ☑️ Mark tasks as completed
+
+- 💾 Persistent data using LocalStorage
+
+- 🌗 Light/Dark theme toggle
+
+**📂 Project Structure**
+
+(This Project Structure located in *index.tldr* file)
+
+**🧠 Logic Breakdown (How It Works)**
+
+
 ## Practice Set:
 
 <details><summary>
