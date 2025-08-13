@@ -83,6 +83,74 @@ The project demonstrates how to organize code into separate modules and import/e
 
 **🧠 Logic Breakdown (How It Works)**
 
+1️⃣ main.js
+
+- Acts as the entry point.
+
+- Imports functions from other modules (dom.js, storage.js, actions.js, theme.js).
+
+- Initializes event listeners for:
+
+  * Adding a task
+
+   - Toggling theme
+
+  - Page load data rendering
+
+```js
+import { renderTasks } from './dom.js';
+import { getTasks } from './storage.js';
+import { initActions } from './actions.js';
+import { initTheme } from './theme.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderTasks(getTasks());
+    initActions();
+    initTheme();
+});
+```
+2️⃣ storage.js (Data Persistence)
+
+- Stores all tasks in localStorage.
+
+- Functions:
+
+  - `getTasks()` → returns array of stored tasks.
+
+  - `saveTasks(tasks) `→ saves updated tasks.
+
+  - Uses `JSON.stringify()` and `JSON.parse()` for conversion.
+
+3️⃣ dom.js (UI Rendering)
+
+- Responsible for:
+
+  - Creating new task elements in the DOM.
+
+  - Updating the UI when tasks are added/removed/edited.
+
+- Uses template literals to generate task HTML.
+
+4️⃣ actions.js (Event Handling)
+
+- Contains logic for:
+
+  - Adding tasks
+
+  - Deleting tasks
+
+  - Editing tasks
+
+  - Toggling completion status
+
+- Updates both UI (via dom.js) and data (via storage.js).
+
+5️⃣ theme.js (Light/Dark Mode)
+
+- Adds theme toggle button.
+
+- Saves user’s choice in localStorage so theme stays same after refresh.
+
 
 ## Practice Set:
 
