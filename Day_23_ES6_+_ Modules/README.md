@@ -168,7 +168,7 @@ index.html: Create an HTML file with a button and a paragraph element. Add a scr
 Connect it all: In main.js, add a click event listener to the button. When clicked, it should use the imported generateGreeting function to create a greeting and display it in the paragraph element.
 </summary>
 
-**solution**
+**solution**: 
 
 This solution requires three separate files. You can create them in the same folder and open index.html in your browser to see the result.
 
