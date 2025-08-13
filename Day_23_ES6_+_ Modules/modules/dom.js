@@ -1,6 +1,6 @@
 export function renderTasks(tasks, container) {
   container.innerHTML = "";
-  tasks.forEach((task) => {
+  tasks.filter(task => task.text.trim() !== "").forEach((task) => {
     const li = document.createElement("li");
     const span = document.createElement("span");
     span.textContent = task.text;
