@@ -92,7 +92,7 @@ Let's break down how the provided code works, from the basic HTML structure to t
 
 Here are some challenges to solidify your understanding and expand on the project's features.
 
- (unfold the Solution tab to compare.)
+(Try each task yourself first, then unfold the Solution tab to compare.)
  
  <details><summary>
 1. Use a Different API: Find a different public API (e.g., a quote API, a fact API, a dad joke API) and modify the code to fetch data from it. You will need to inspect the data structure returned by the new API and adjust your data object properties accordingly (e.g., data.joke instead of data.setup).
