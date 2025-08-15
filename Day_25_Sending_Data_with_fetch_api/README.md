@@ -27,6 +27,147 @@ fetch(url, {
   body: JSON.stringify({ title: "New Task" }), // The data, converted to a JSON string
 });
 ```
+
+# Feedback Form — Sending Data with Fetch API
+
+## 📌 Overview
+This is a modern **Feedback Form** web app that demonstrates how to send data to a server using the **Fetch API (POST request)**.  
+It uses a clean **glassmorphism design**, star rating system, form validation, and interactive UI elements such as loading animations, toast notifications, and a success dialog.
+
+The backend here is a **mock API** from [Reqres](https://reqres.in/), which is great for testing HTTP requests without creating your own server.
+
+---
+
+##  Features
+- **Glassmorphism UI** — modern transparent blur effect
+- **Responsive Layout** — works on all screen sizes
+- **Star Rating** — 1–5 star selection
+- **Form Validation** — required fields with error messages
+- **Character Counter** — live count for the message box
+- **Loading Animation** — spinner on submit button
+- **Success & Error Notifications** — modern toast messages
+- **Success Dialog** — confirmation popup after submission
+- **Reset Button** — clear all fields and errors
+- **Mock API Testing** — using [Reqres](https://reqres.in/) POST endpoint
+
+
+---
+
+## 🛠 Tech Stack
+- **HTML5** — form elements & structure
+- **CSS3** — modern UI with glassmorphism + animations
+- **JavaScript (ES6+)** — validation, Fetch API calls, UI interactivity
+- **Mock API** — `https://reqres.in/api/users` for testing
+
+---
+
+## 🔍 How It Works
+
+ **1. UI Setup**
+
+- `index.html` contains:
+  - Name, Email, Rating, and Message fields
+  - Star rating radio inputs
+  - Character counter under message box
+  - Submit & Reset buttons
+  - Toast notification container
+  - Success dialog popup
+
+---
+
+ **2. Form Validation (script.js)**
+
+When the user clicks **Submit**:
+1. **Name Validation**  
+   - Must be at least 2 characters.
+2. **Email Validation**  
+   - Must match standard email format (`name@example.com`).
+3. **Rating Validation**  
+   - One of the star options must be selected.
+4. **Message Validation**  
+   - At least 10 characters and not more than 300.
+
+If validation fails:
+- Error messages appear below the fields.
+- A red toast notification appears saying “Fix the highlighted fields.”
+
+---
+
+ **3. Sending Data with Fetch API**
+
+If validation passes:
+```javascript
+const payload = {
+  name: $("#name").value.trim(),
+  email: $("#email").value.trim(),
+  rating: $("input[name='rating']:checked").value,
+  message: $("#message").value.trim(),
+  sentAt: new Date().toISOString()
+};
+
+const res = await fetch(ENDPOINT, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(payload)
+});
+
+```
+- The form data is converted to JSON and sent in a POST request to https://reqres.in/api/users.
+
+- await `fetch()` waits for the server's response.
+
+
+**4. Response Handling**
+
+- If res.ok is true (status 200–299):
+
+  - A green toast notification appears: “Feedback sent successfully!”
+
+  - The success dialog popup appears.
+
+  - The form resets after a short delay.
+
+  - Server’s JSON response is logged in the console for reference.
+
+- If res.ok is false:
+
+  - A red toast notification appears with the status code.
+
+  - Status message says: “❌ Failed to send. Try again.”
+
+- If network error occurs:
+
+  - Red toast says: “Network error. Please try again.”
+
+  - Status message says: “⚠ Network error. Check your connection.”
+
+**5. Loading State**
+
+- The Submit button shows a spinner while sending data.
+
+- Button is disabled to prevent multiple submissions.
+
+- Spinner hides and button reactivates after request finishes.
+
+**6. Reset Button**
+
+- Clears all fields and error messages.
+
+- Resets character counter to 0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Practice Set :
 <details><summary >
 1. Make a TO DO App  That include these functions:
