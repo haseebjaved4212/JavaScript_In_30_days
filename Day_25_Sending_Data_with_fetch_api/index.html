@@ -2,96 +2,33 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Feedback — Fetch API Demo</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Form</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <!-- Decorative blobs -->
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
 
-  <main class="shell">
-    <header class="app-header">
-      <h1>Share Your Feedback</h1>
-      <p>We’d love to hear your thoughts. This demo sends data with the Fetch API.</p>
-    </header>
-
-    <form id="feedbackForm" novalidate>
-      <div class="field">
-        <label for="name">Name <span>*</span></label>
-        <input id="name" name="name" type="text" placeholder="John Doe" required minlength="2" />
-        <small class="error" data-for="name"></small>
-      </div>
-
-      <div class="field">
-        <label for="email">Email <span>*</span></label>
-        <input id="email" name="email" type="email" placeholder="john@example.com" required />
-        <small class="error" data-for="email"></small>
-      </div>
-
-      <div class="field">
-        <label>Rating <span>*</span></label>
-        <div class="rating" role="radiogroup" aria-label="Star rating">
-          <!-- 5 to 1 so CSS :checked ~ label works nicely -->
-          <input type="radio" id="star5" name="rating" value="5" required />
-          <label for="star5" aria-label="5 stars">★</label>
-
-          <input type="radio" id="star4" name="rating" value="4" />
-          <label for="star4" aria-label="4 stars">★</label>
-
-          <input type="radio" id="star3" name="rating" value="3" />
-          <label for="star3" aria-label="3 stars">★</label>
-
-          <input type="radio" id="star2" name="rating" value="2" />
-          <label for="star2" aria-label="2 stars">★</label>
-
-          <input type="radio" id="star1" name="rating" value="1" />
-          <label for="star1" aria-label="1 star">★</label>
-        </div>
-        <small class="error" data-for="rating"></small>
-      </div>
-
-      <div class="field">
-        <label for="message">Message <span>*</span></label>
-        <textarea id="message" name="message" rows="5" placeholder="Write your feedback..." required minlength="10"
-          maxlength="300"></textarea>
-        <div class="helper">
-          <small><span id="charCount">0</span>/300</small>
-          <small class="error" data-for="message"></small>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button id="submitBtn" type="submit" class="btn primary">
-          <span class="btn-label">Send Feedback</span>
-          <span class="spinner" aria-hidden="true"></span>
-        </button>
-        <button id="resetBtn" type="reset" class="btn ghost">Reset</button>
-      </div>
-
-      <p id="status" class="status" aria-live="polite"></p>
+  <div class="container">
+    <h1>Feedback Form</h1>
+    <form id="feedbackForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <select id="rating" required>
+        <option value="">Select Rating ⭐</option>
+        <option value="⭐">⭐</option>
+        <option value="⭐⭐">⭐⭐</option>
+        <option value="⭐⭐⭐">⭐⭐⭐</option>
+        <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+        <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
+      </select>
+      <textarea id="message" placeholder="Your Feedback" required></textarea>
+      <button type="submit">Send Feedback</button>
     </form>
+  </div>
 
-    <footer class="app-footer">
-      <small>Demo endpoint: <code>https://reqres.in/api/users</code> (POST)</small>
-    </footer>
-  </main>
-
-  <!-- Toasts -->
-  <div id="toasts" class="toasts" aria-live="polite" aria-atomic="true"></div>
-
-  <!-- Success Dialog -->
-  <dialog id="successDialog" class="dialog">
-    <div class="dialog-card">
-      <div class="dialog-icon">✅</div>
-      <h2>Feedback Sent</h2>
-      <p>Thanks! Your feedback was submitted successfully.</p>
-      <button class="btn primary" id="closeDialog">Close</button>
-    </div>
-  </dialog>
+  <div class="feedback-list" id="feedbackList"></div>
 
   <script src="index.js"></script>
 </body>
