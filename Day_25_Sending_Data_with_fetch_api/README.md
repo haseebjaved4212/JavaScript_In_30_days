@@ -157,17 +157,6 @@ const res = await fetch(ENDPOINT, {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 ## Practice Set :
 <details><summary >
 1. Make a TO DO App  That include these functions:
@@ -182,6 +171,7 @@ const res = await fetch(ENDPOINT, {
  *Delete (DELETE)*: A user can remove a task from the list by clicking the delete button, which removes the item from the tasks array after a simulated delay.
 </summary>
 
+**Solution**
 ```html
 
 <!DOCTYPE html>
