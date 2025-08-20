@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bouncing Ball Game</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f4f8;
+      font-family: 'Inter', sans-serif;
+      color: #1e293b;
+    }
+
+    .game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    canvas {
+      background-color: #e2e8f0;
+      border-radius: 8px;
+      border: 2px solid #cbd5e1;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+    }
+
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    #startButton {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    #messageBox {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="game-container">
+    <h1>Bouncy Ball Game</h1>
+    <canvas id="gameCanvas" width="480" height="320"></canvas>
+    <div class="controls">
+      <button id="startButton" class="button">Start Game</button>
+    </div>
+    <div id="messageBox"></div>
+  </div>
+
+</body>
+
+</html>
