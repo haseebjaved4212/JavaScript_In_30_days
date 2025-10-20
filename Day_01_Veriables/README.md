@@ -158,7 +158,7 @@ console.log(true);                   // Prints a boolean
 **Practice Set Day 1:**
 
 Variable & Data Type Exploration
-Test your understanding with these small exercises. You can open your browser console and type these directly or create a new<script> tag in an HTML file.
+Test your understanding with these small exercises. You can open your browser console and type these directly or create a new <script> tag in an HTML file.
 
 ### Declare and Assign:
 
@@ -186,6 +186,7 @@ Test your understanding with these small exercises. You can open your browser co
 - Declare a let variable emptyBox and assign it null. What will console.log(emptyBox) show?
 
 - Observe the difference in the console output.
+alt;h1>
 
  #### Bonus Tips :
 - Semicolons are Optional (Mostly): JavaScript doesn't always require semicolons (;) at the end of statements, thanks to Automatic Semicolon Insertion (ASI). However, it's a good practice to use them consistently, especially when starting out, as it can prevent subtle bugs.
@@ -217,11 +218,11 @@ Goal: Create a simple HTML file with an embedded JavaScript block that simulates
 
 - Inside this folder, create a file named day1_project.html.
 
-- Add the basic HTML structure (<!DOCTYPE html>, <html>, <head>, <body>).
+- Add the basic HTML structure (alt;!DOCTYPE html>, alt;html>, alt;head>, alt;body>).
 
 - Include a simple heading in the body , e.g., <h1>Check Console (F12) for Product Details</h1>.
 
-- Place your JavaScript code inside a <script> tag. For best practice and to ensure the HTML content is ready, place this <script> tag just before the closing </body> tag.
+- Place your JavaScript code inside a alt;script> tag. For best practice and to ensure the HTML content is ready, place this <script> tag just before the closing </body> tag.
 
 - Declare Initial Product Variables (JavaScript):
 

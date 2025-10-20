@@ -41,7 +41,7 @@ console.log(person);
 // Output: { firstName: 'Alice', lastName: 'Smith', age: 30, isStudent: false }
 ```
 
-- b. Using the new Object() Constructor (Less Common)You can create an empty object and then add properties to it.
+- b. Using the new `Object()` Constructor (Less Common)You can create an empty object and then add properties to it.
 
 **Syntax:**
 
@@ -49,15 +49,19 @@ console.log(person);
 const objectName = new Object();
 objectName.key1 = value1;
 objectName.key2 = value2;
-Example:const car = new Object();
+```
+Example:
+```js
+const car = new Object();
 car.make = "Toyota";
 car.model = "Camry";
 car.year = 2022;
 console.log(car);
 // Output: { make: 'Toyota', model: 'Camry', year: 2022 }
+
 ```
 
-- c. Constructor Functions (Traditional OOP)Before ES6 Classes, constructor functions were the primary way to create multiple objects of the same "type" or "blueprint."
+- **c.** Constructor Functions (Traditional OOP)Before ES6 Classes, constructor functions were the primary way to create multiple objects of the same "type" or "blueprint."
   **Syntax:**
 
 ```js
@@ -69,8 +73,12 @@ function ConstructorName(param1, param2) {
     // ...
   };
 }
-const instance = new ConstructorName(arg1, arg2);
-Example: function Book(title, author, pages) {
+```
+- **const instance = new ConstructorName(arg1, arg2);**
+
+Example:
+```js
+ function Book(title, author, pages) {
   this.title = title;
   this.author = author;
   this.pages = pages;
