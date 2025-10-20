@@ -92,7 +92,7 @@ console.log(book1.getInfo()); // Output: The Hobbit by J.R.R. Tolkien, 310 pages
 
 ### 4. Accessing Object Propertiesa.
 
-Dot Notation (Most Common)Use when you know the property name beforehand and it's a valid JavaScript identifier (no spaces, starts with letter/underscore/$).
+- Dot Notation (Most Common)Use when you know the property name beforehand and it's a valid JavaScript identifier (no spaces, starts with letter/underscore/$).
 
 **Syntax:**
 
@@ -103,9 +103,11 @@ console.log(user.email); // Output: john@example.com
 
 ```
 
-- b. Bracket NotationUse when:
+- b. Bracket Notation Use when:
 
 The property name contains spaces or special characters.The property name is stored in a variable (dynamic access).The property name is a number (though not common for object keys).
+
+
 **Syntax:**
 
 ```js
@@ -117,9 +119,9 @@ console.log(product[prop]); // Output: 1200 (dynamic access)
 
 ```
 
-### 5. Modifying, Adding, and Deleting PropertiesModifying:
+### 5. Modifying, Adding, and Deleting Properties:
 
-Assign a new value to an existing property.
+- **Modifying:** Assign a new value to an existing property.
 
 ```js
 const person = { name: "Alice", age: 30 };
@@ -127,7 +129,7 @@ person.age = 31; // Modify age
 console.log(person); // Output: { name: 'Alice', age: 31 }
 ```
 
-Adding: Assign a value to a new property name.
+- ***Adding:** Assign a value to a new property name.
 
 ```js
 const person = { name: "Alice" };
@@ -135,7 +137,7 @@ person.city = "New York"; // Add new property
 console.log(person); // Output: { name: 'Alice', city: 'New York' }
 ```
 
-Deleting: Use the delete operator.
+-  **Deleting:** Use the delete operator.
 
 ```js
 const person = { name: "Alice", age: 30 };
@@ -424,8 +426,8 @@ console.log("User with ID 2:", userWithId2); // Output: { id: 2, name: 'Bob' }</
 
 ## 💡 Key Takeaways for Day 06:
 
-- Objects are fundamental for structuring complex, related data using key-value pairs.
-- Use dot notation for known, valid property names; bracket notation for dynamic access or invalid names.
-- Functions within objects are called methods; this inside a method refers to the object itself.
-- Object.keys(), Object.values(), and Object.entries() are useful for iterating over object data.
+- `Objects` are fundamental for structuring complex, related data using key-value pairs.
+- Use `dot notation` for known, valid property names; `bracket notation` for dynamic access or invalid names.
+- Functions within `objects` are called `methods`; this inside a method refers to the object itself.
+- `Object.keys()`, `Object.values()`, and `Object.entries()` are useful for iterating over object data.
 - Arrays and objects often work together (e.g., an array of objects) to represent collections of structured data.
