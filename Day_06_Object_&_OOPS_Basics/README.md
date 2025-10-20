@@ -313,6 +313,7 @@ Dynamically populates the category filter dropdown.
 **4. Event Listeners (Connecting UI to Logic)**
 
 ```js
+
 categoryFilter.addEventListener("change", (event) => {
   renderProductList(event.target.value); // Re-render list with new filter
   clearProductDetails(); // Clear details when filter changes
@@ -329,11 +330,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 **Category Filter:**
 
-- When the value of the categoryFilter dropdown changes, it calls renderProductList() with the newly selected category and also clears any currently displayed product details.
+- When the value of the categoryFilter dropdown changes, it calls `renderProductList()` with the newly selected category and also clears any currently displayed product details.
 
-- Clear Details Button: When clicked, it calls clearProductDetails().
+- **Clear Details Button:** When clicked, it calls `clearProductDetails()`.
 
-- Initial Setup: DOMContentLoaded ensures that populateCategories() and renderProductList() are called when the page first loads, populating the filter and displaying all products.
+- **Initial Setup:** DOMContentLoaded ensures that `populateCategories()` and `renderProductList()` are called when the page first loads, populating the filter and displaying all products.
 
 This project provides a hands-on demonstration of how objects are used to structure data, how to access their properties, and how to use array methods (filter, find, forEach, map) to work with collections of objects, all within a visually appealing interface.
 
