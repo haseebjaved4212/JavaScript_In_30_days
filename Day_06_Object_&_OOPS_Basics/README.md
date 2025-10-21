@@ -194,7 +194,7 @@ dog.introduce(); // Output: Hi, I'm Buddy the Golden Retriever.
 
 ### 8. Useful Object Methods (Static Methods on Object constructor)
 
-These are built-in methods on the global Object constructor that help you work with objects.Object.keys(obj): Returns an array of a given object's own enumerable property names (keys).
+These are built-in methods on the global Object constructor that help you work with objects.Object.`keys(obj):` Returns an array of a given object's own enumerable property names (keys).
 **Example:**
 
 ```js
@@ -206,7 +206,7 @@ Object.entries(obj): Returns an array of a given object's own enumerable string-
 console.log(Object.entries(obj)); // Output: [['a', 1], ['b', 2], ['c', 3]]
 ```
 
-## 📝 Project for Day 06: Simple Product Catalog Viewer
+##  Project for Day 06: Simple Product Catalog Viewer
 
 Today's project is an interactive Product Catalog Viewer. This application will demonstrate how to represent structured data using JavaScript objects and arrays of objects, and how to display and interact with that data on a web page.Features:Display a list of products with their basic information.Click on a product to view its detailed information in a separate section.Filter products by category.Clear product details.
 (This project's code is located in index.html and index.js within this Day06 folder.)
