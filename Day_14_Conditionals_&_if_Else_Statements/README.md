@@ -31,7 +31,7 @@ if (age >= 18) {
 ```
 **2. switch Statement**
 
-A switch statement is an alternative to a long if...else if... chain, especially when you are comparing a single value against multiple possible cases.
+A `switch statement `is an alternative to a long if...else if... chain, especially when you are comparing a single value against multiple possible cases.
 
 **Syntax:**
 
