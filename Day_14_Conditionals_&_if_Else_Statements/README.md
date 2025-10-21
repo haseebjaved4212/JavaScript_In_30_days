@@ -1,7 +1,7 @@
 # Day 14: Conditional Statements
 Welcome to Day 14 of our 30 Days of JavaScript Challenge! Today, we're diving into conditional statements, which are fundamental to programming. They allow your code to make decisions and execute different blocks of code based on whether a condition is true or false.
 
-Our project, the "Age Eligibility Checker," will provide a practical way to apply if/else and switch statements to solve a real-world problem.
+Our project, the **"Age Eligibility Checker,"** will provide a practical way to apply if/else and switch statements to solve a real-world problem.
 
 ## 📚 Core Concepts Covered:
 
